@@ -65,15 +65,6 @@
       font-size: 0.9rem;
       color: #666;
     }
-    .btn {
-      display: inline-block;
-      background: #ff2e2e;
-      color: white;
-      padding: 0.8rem 1.2rem;
-      text-decoration: none;
-      border-radius: 5px;
-      margin-top: 1rem;
-    }
     form label {
       display: block;
       margin-bottom: 1rem;
@@ -111,6 +102,8 @@
       border: none;
       color: #f2f2f2;
       cursor: pointer;
+      font-size: 1.1rem;
+      padding: 0;
     }
     .logo-img {
       display: block;
@@ -146,175 +139,5 @@
     <img src="https://via.placeholder.com/300x100?text=Luciferium+Logo" alt="Logo Luciferium" class="logo-img" />
   </div>
 
-  <section id="univers" class="section">
-    <h3>Bienvenue dans l'univers de Luciferium</h3>
-    <p>Luciferium est une application unique mêlant mythe, spiritualité et interaction avec les forces de l'ombre. Une expérience sensorielle complète, appuyée par un forum, des cadeaux mystiques et une ambiance sonore ténébreuse.</p>
-  </section>
+  <section id="univers" class="section"
 
-  <section id="connexion" class="section">
-    <h3>Connexion / Inscription</h3>
-    <form id="loginForm">
-      <label>Email : <input type="email" id="email" required /></label>
-      <label>Mot de passe :
-        <div class="password-container">
-          <input type="password" id="password" required />
-          <button type="button" class="toggle-password" onclick="togglePassword()">👁</button>
-        </div>
-      </label>
-      <button type="submit">Se connecter / S'inscrire</button>
-    </form>
-  </section>
-
-  <section id="cadeaux" class="section">
-    <h3>Cadeaux & Codes Mystiques</h3>
-    <p>Des codes seront distribués à nos fidèles pour débloquer des secrets cachés dans l'application. Activez-les dans votre compte pour bénéficier de bonus exclusifs.</p>
-  </section>
-
-  <section id="forum" class="section">
-    <h3>Forum</h3>
-
-    <div id="forumArea" class="hidden">
-      <div id="messagesList"></div>
-
-      <form id="messageForm">
-        <label for="messageInput">Votre message :</label>
-        <textarea id="messageInput" rows="3" required></textarea>
-        <button type="submit" style="margin-top: 0.5rem;">Envoyer</button>
-      </form>
-    </div>
-
-    <div id="forumLocked" class="section">
-      <p>Vous devez être connecté pour accéder au forum.</p>
-    </div>
-  </section>
-
-  <div class="footer">
-    © 2025 Luciferium - Tous droits réservés.
-  </div>
-
-  <script>
-    // Toggle affichage mot de passe
-    function togglePassword() {
-      const pwd = document.getElementById('password');
-      pwd.type = pwd.type === 'password' ? 'text' : 'password';
-    }
-
-    // Afficher les messages du forum
-    function displayMessages() {
-      const messagesList = document.getElementById('messagesList');
-      let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
-
-      if (messages.length === 0) {
-        messagesList.innerHTML = '<p>Aucun message pour le moment. Soyez le premier à écrire !</p>';
-        return;
-      }
-
-      messages.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-      messagesList.innerHTML = '';
-      messages.forEach((msg) => {
-        const msgDiv = document.createElement('div');
-        msgDiv.style.borderBottom = '1px solid #333';
-        msgDiv.style.padding = '0.3rem 0';
-
-        const date = new Date(msg.date);
-        const dateStr = date.toLocaleString();
-
-        msgDiv.innerHTML = `<strong>${msg.pseudo}</strong> <em style="font-size:0.8rem; color:#888;">(${dateStr})</em><br>${escapeHtml(msg.text)}`;
-
-        messagesList.appendChild(msgDiv);
-      });
-
-      messagesList.scrollTop = messagesList.scrollHeight;
-    }
-
-    // Sécurité basique pour échapper le html
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
-
-    // Gestion du formulaire connexion / inscription
-    const loginForm = document.getElementById('loginForm');
-    loginForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const emailInput = document.getElementById('email');
-      const passwordInput = document.getElementById('password');
-
-      const email = emailInput.value.trim();
-      const password = passwordInput.value.trim();
-
-      if (!email || !password) {
-        alert('Veuillez remplir tous les champs.');
-        return;
-      }
-
-      // Simple stockage utilisateur (localStorage) - pour test seulement
-      const userData = {
-        email,
-        loggedIn: true,
-      };
-
-      localStorage.setItem('luciferiumUser', JSON.stringify(userData));
-      updateUI();
-      loginForm.reset();
-      alert('Connexion réussie !');
-    });
-
-    // Gestion envoi message forum
-    const messageForm = document.getElementById('messageForm');
-    messageForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const messageInput = document.getElementById('messageInput');
-      const text = messageInput.value.trim();
-      if (text.length === 0) return;
-
-      const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
-      if (!userData || !userData.loggedIn) {
-        alert('Vous devez être connecté pour poster un message.');
-        return;
-      }
-
-      const pseudo = userData.email.split('@')[0] || 'Anonyme';
-      const newMsg = {
-        pseudo,
-        text,
-        date: new Date().toISOString(),
-      };
-
-      let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
-      messages.push(newMsg);
-      localStorage.setItem('luciferiumMessages', JSON.stringify(messages));
-
-      messageInput.value = '';
-      displayMessages();
-    });
-
-    // Mise à jour de l'affichage en fonction de la connexion
-    function updateUI() {
-      const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
-
-      const forumArea = document.getElementById('forumArea');
-      const forumLocked = document.getElementById('forumLocked');
-      const connexionSection = document.getElementById('connexion');
-
-      if (userData && userData.loggedIn) {
-        forumArea.classList.remove('hidden');
-        forumLocked.classList.add('hidden');
-        connexionSection.classList.add('hidden');
-      } else {
-        forumArea.classList.add('hidden');
-        forumLocked.classList.remove('hidden');
-        connexionSection.classList.remove('hidden');
-      }
-    }
-
-    // Initialisation page
-    displayMessages();
-    updateUI();
-  </script>
-</body>
-</html>

@@ -254,9 +254,13 @@
     }
 
     authForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const email = emailInput.value.trim().toLowerCase();
-      const password = passwordInput.value;
+     // Supprimer ce bloc, il n'est pas utile si updateUI n'existe pas
+// const originalUpdateUI = updateUI;
+// updateUI = function() {
+//   originalUpdateUI();
+//   updateForumVisibility();
+// };
+
 
       if (mode === 'signup') {
         if (localStorage.getItem(`luciferiumUser_${email}`)) {

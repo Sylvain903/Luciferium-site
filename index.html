@@ -5,153 +5,190 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Luciferium</title>
   <style>
-    /* Styles inchangés + ajout du background infernal */
+    /* --- Style global --- */
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
       background-size: cover;
       color: #f2f2f2;
-      overflow-y: scroll;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-    /* Background overlay pour nuancer en sombre rouge/noir */
+    /* Overlay sombre rouge/noir */
     body::before {
       content: "";
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(30, 0, 0, 0.7);
+      background: rgba(30, 0, 0, 0.75);
       pointer-events: none;
-      z-index: -1;
+      z-index: 0;
     }
 
     header {
-      background: rgba(22, 22, 22, 0.85);
+      position: relative;
+      background: rgba(22, 22, 22, 0.9);
       padding: 1rem 2rem;
       text-align: center;
-      border-bottom: 1px solid #333;
-      position: relative;
-      z-index: 10;
+      border-bottom: 1px solid #330000;
+      z-index: 1;
     }
     header h1 {
-      font-size: 2.5rem;
-      color: #ff2e2e;
-      letter-spacing: 3px;
+      font-size: 2.8rem;
+      color: #ff3b3b;
+      letter-spacing: 4px;
+      margin: 0;
+      text-shadow: 0 0 8px #a00000;
     }
-    .logout-button {
+    .logout-button, #loginBtn {
       position: absolute;
       top: 1rem;
       right: 2rem;
-      background: #ff2e2e;
+      background: #ff3b3b;
       border: none;
       padding: 0.5rem 1rem;
       color: white;
-      font-weight: bold;
+      font-weight: 700;
       border-radius: 4px;
       cursor: pointer;
-      z-index: 11;
+      z-index: 2;
+      font-size: 1rem;
+      transition: background 0.3s ease;
     }
-    .logout-button:hover {
-      background: #d92626;
+    .logout-button:hover, #loginBtn:hover {
+      background: #cc2a2a;
     }
+    #loginBtn {
+      right: 2rem;
+    }
+
     nav {
+      background: rgba(22, 22, 22, 0.8);
       display: flex;
       justify-content: center;
       gap: 2rem;
-      background: rgba(17, 17, 17, 0.85);
-      padding: 1rem;
+      padding: 1rem 0;
+      z-index: 1;
       position: relative;
-      z-index: 10;
     }
     nav a {
-      color: #ccc;
-      text-decoration: none;
+      color: #ff6666;
       font-weight: bold;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
     }
     nav a:hover {
-      color: #ff2e2e;
+      color: #ff9999;
     }
+
     .hero {
-      background: rgba(14, 14, 14, 0.85);
-      padding: 4rem 2rem;
+      background: rgba(0,0,0,0.6);
+      padding: 4rem 2rem 5rem;
       text-align: center;
-      border-bottom: 1px solid #222;
+      border-bottom: 1px solid #330000;
       position: relative;
-      z-index: 9;
+      z-index: 1;
     }
     .hero h2 {
-      font-size: 2.2rem;
-      color: #fff;
-      text-shadow: 1px 1px 8px #000;
+      font-size: 2.5rem;
+      color: #ff6666;
+      text-shadow: 0 0 10px #600000;
+      margin-bottom: 1.5rem;
     }
-    .section {
-      padding: 3rem 2rem;
-      max-width: 800px;
-      margin: auto;
-      background: rgba(20, 0, 0, 0.65);
-      border-radius: 8px;
-      margin-bottom: 2rem;
-      position: relative;
-      z-index: 8;
-    }
-    .section h3 {
-      color: #ff2e2e;
-      font-size: 1.7rem;
-      margin-bottom: 1rem;
-    }
-    .footer {
-      background: rgba(17, 17, 17, 0.85);
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #666;
-      position: relative;
-      z-index: 9;
+    .logo-img {
+      max-width: 300px;
+      margin: 0 auto 2rem;
+      display: block;
+      filter: drop-shadow(0 0 6px #a00);
     }
     .btn {
-      display: inline-block;
-      background: #ff2e2e;
+      background: #ff3b3b;
       color: white;
-      padding: 0.8rem 1.2rem;
+      padding: 0.9rem 2rem;
       text-decoration: none;
+      font-weight: 700;
       border-radius: 5px;
-      margin-top: 1rem;
+      font-size: 1.1rem;
+      display: inline-block;
       cursor: pointer;
+      transition: background 0.3s ease;
       border: none;
-      font-weight: bold;
-      font-size: 1rem;
     }
+    .btn:hover {
+      background: #cc2a2a;
+    }
+
+    .section {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 1rem 2rem;
+      background: rgba(20, 0, 0, 0.7);
+      border-radius: 8px;
+      box-shadow: 0 0 15px #500000;
+      position: relative;
+      z-index: 1;
+    }
+    .section h3 {
+      color: #ff3b3b;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 6px #a00000;
+    }
+    p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: #f2f2f2;
+    }
+
     form label {
       display: block;
       margin-bottom: 1rem;
+      font-weight: 600;
     }
-    input, textarea {
-      padding: 0.5rem;
-      background: #222;
-      border: 1px solid #444;
-      border-radius: 4px;
-      color: #f2f2f2;
+    input[type="email"], input[type="password"], textarea {
       width: 100%;
-      font-size: 1rem;
-    }
-    button {
-      background: #ff2e2e;
-      border: none;
-      padding: 0.6rem 1rem;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
+      padding: 0.6rem;
       border-radius: 4px;
+      border: 1px solid #550000;
+      background: #220000;
+      color: #f2f2f2;
+      font-size: 1rem;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+    input[type="email"]:focus, input[type="password"]:focus, textarea:focus {
+      outline: none;
+      border-color: #ff3b3b;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    button {
+      background: #ff3b3b;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.3rem;
+      font-weight: 700;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
     }
     button:hover {
-      background: #d92626;
+      background: #cc2a2a;
     }
+
     .password-container {
       position: relative;
     }
     .toggle-password {
       position: absolute;
-      right: 10px;
       top: 50%;
+      right: 10px;
       transform: translateY(-50%);
       background: none;
       border: none;
@@ -159,22 +196,55 @@
       cursor: pointer;
       font-size: 1.2rem;
     }
-    .logo-img {
-      display: block;
-      margin: 1rem auto 2rem;
-      max-width: 300px;
-      position: relative;
-      z-index: 10;
+
+    #forumArea {
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #550000;
+      padding: 10px;
+      background: #220000;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      color: #f2f2f2;
+      font-size: 0.95rem;
     }
+    #forumArea div {
+      border-bottom: 1px solid #550000;
+      padding: 0.3rem 0;
+    }
+
+    #forumLocked {
+      background: #330000;
+      padding: 1rem;
+      border-radius: 5px;
+      color: #ffa0a0;
+      text-align: center;
+      font-weight: 600;
+      box-shadow: 0 0 10px #700000;
+    }
+
     .hidden {
-      display: none;
+      display: none !important;
+    }
+
+    .footer {
+      background: rgba(20, 0, 0, 0.8);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: #aa4444;
+      margin-top: auto;
+      box-shadow: 0 0 10px #440000 inset;
+      z-index: 1;
+      position: relative;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>LUCIFERIUM</h1>
-    <button class="logout-button hidden" onclick="playScreamAndLogout()">Déconnexion</button>
+    <button id="loginBtn">Connexion</button>
+    <button class="logout-button hidden" onclick="logout()">Déconnexion</button>
   </header>
   <nav>
     <a href="#univers">L'univers</a>
@@ -186,7 +256,7 @@
   <div class="hero">
     <h2>Ouvrez les portes de l'ombre</h2>
     <img src="https://via.placeholder.com/300x100?text=Luciferium+Logo" alt="Logo Luciferium" class="logo-img" />
-    <button id="btnConnexion" class="btn">Connexion / Inscription</button>
+    <button class="btn" onclick="showConnexion()">Connexion / Inscription</button>
   </div>
 
   <section id="univers" class="section">
@@ -197,12 +267,10 @@
   <section id="connexion" class="section hidden">
     <h3>Connexion / Inscription</h3>
     <form id="loginForm">
-      <label>Email :
-        <input type="email" id="email" required autocomplete="username" />
-      </label>
+      <label>Email : <input type="email" id="email" required /></label>
       <label>Mot de passe :
         <div class="password-container">
-          <input type="password" id="password" required autocomplete="current-password" />
+          <input type="password" id="password" required />
           <button type="button" class="toggle-password" onclick="togglePassword()">👁</button>
         </div>
       </label>
@@ -217,125 +285,100 @@
 
   <section id="forum" class="section hidden">
     <h3>Forum</h3>
-    <div id="forumArea">
-      <div id="messagesList" style="max-height:300px; overflow-y:auto; border:1px solid #444; padding:10px; background:#111; margin-bottom:1rem;"></div>
-      <form id="messageForm">
-        <label for="messageInput">Votre message :</label>
-        <textarea id="messageInput" rows="3" required style="width:100%; background:#222; color:#f2f2f2; border:1px solid #444; border-radius:4px; padding:0.5rem;"></textarea>
-        <button type="submit" style="margin-top:0.5rem; background:#ff2e2e; color:#fff; border:none; padding:0.5rem 1rem; border-radius:4px; cursor:pointer;">Envoyer</button>
-      </form>
-    </div>
-    <div id="forumLocked" class="hidden">
-      <p>Vous devez être connecté pour accéder au forum.</p>
-    </div>
+    <div id="forumArea"></div>
+    <form id="messageForm">
+      <label for="messageInput">Votre message :</label>
+      <textarea
+        id="messageInput"
+        rows="3"
+        required
+        style="width: 100%; background: #220000; color: #f2f2f2; border: 1px solid #550000; border-radius: 4px; padding: 0.5rem;"
+      ></textarea>
+      <button type="submit" style="margin-top: 0.5rem;">Envoyer</button>
+    </form>
   </section>
 
-  <div class="footer">
+  <footer class="footer">
     © 2025 Luciferium - Tous droits réservés.
-  </div>
+  </footer>
 
   <!-- Sons -->
-  <audio id="doorSound" src="https://actions.google.com/sounds/v1/doors/door_creak_long.ogg" preload="auto"></audio>
-  <audio id="screamSound" src="https://actions.google.com/sounds/v1/human_voices/scream_female_short.ogg" preload="auto"></audio>
+  <audio id="doorSound" src="https://actions.google.com/sounds/v1/doors/door_creak_open_long.ogg" preload="auto"></audio>
+  <audio id="screamSound" src="https://actions.google.com/sounds/v1/human_voices/male_scream.ogg" preload="auto"></audio>
 
   <script>
+    // Afficher / cacher section connexion
+    function showConnexion() {
+      document.getElementById('connexion').classList.remove('hidden');
+      window.location.hash = '#connexion';
+    }
+
+    // Toggle mot de passe visible
     function togglePassword() {
       const pwd = document.getElementById('password');
       pwd.type = pwd.type === 'password' ? 'text' : 'password';
     }
 
+    // Jouer son porte qui grince à la connexion
     function playDoorSound() {
       const doorSound = document.getElementById('doorSound');
       doorSound.currentTime = 0;
       doorSound.play();
     }
 
-    function playScreamAndLogout() {
+    // Jouer son cri à la déconnexion
+    function playScreamSound() {
       const screamSound = document.getElementById('screamSound');
       screamSound.currentTime = 0;
       screamSound.play();
-      screamSound.onended = () => {
-        logout();
-      };
     }
 
-    function logout() {
-      localStorage.removeItem('luciferiumUser');
-      updateUI();
-      updateForumVisibility();
-      // Après déconnexion, retour en haut de page
-      window.scrollTo(0, 0);
-    }
-
+    // Mise à jour interface utilisateur (affichage des boutons)
     function updateUI() {
       const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
+      const loginBtn = document.getElementById('loginBtn');
       const logoutBtn = document.querySelector('.logout-button');
-      const forumSection = document.getElementById('forum');
       const connexionSection = document.getElementById('connexion');
-      const heroSection = document.querySelector('.hero');
-      const cadeauxSection = document.getElementById('cadeaux');
-      const btnConnexion = document.getElementById('btnConnexion');
+      const forumSection = document.getElementById('forum');
 
       if (userData && userData.loggedIn) {
+        loginBtn.style.display = 'none';
         logoutBtn.classList.remove('hidden');
-        forumSection.classList.remove('hidden');
         connexionSection.classList.add('hidden');
-        heroSection.classList.add('hidden');
-        cadeauxSection.classList.remove('hidden');
-        btnConnexion.classList.add('hidden');
+        forumSection.classList.remove('hidden');
       } else {
+        loginBtn.style.display = 'inline-block';
         logoutBtn.classList.add('hidden');
         forumSection.classList.add('hidden');
-        connexionSection.classList.add('hidden');
-        heroSection.classList.remove('hidden');
-        cadeauxSection.classList.remove('hidden');
-        btnConnexion.classList.remove('hidden');
       }
     }
 
-    document.getElementById('btnConnexion').addEventListener('click', () => {
-      playDoorSound();
-      // Afficher la section connexion / inscription
-      document.getElementById('connexion').classList.remove('hidden');
-      // Cacher la section hero et bouton connexion
-      document.querySelector('.hero').classList.add('hidden');
-      document.getElementById('btnConnexion').classList.add('hidden');
-      // Scroll vers la section connexion
-      document.getElementById('connexion').scrollIntoView({behavior: 'smooth'});
-    });
+    // Fonction logout
+    function logout() {
+      playScreamSound();
+      localStorage.removeItem('luciferiumUser');
+      updateUI();
+      alert('Vous êtes déconnecté.');
+    }
 
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
+    // Gestion connexion / inscription
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
       e.preventDefault();
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value.trim();
-      if (email && password) {
-        // Enregistre user
-        localStorage.setItem('luciferiumUser', JSON.stringify({ email: email, loggedIn: true }));
-        updateUI();
-        updateForumVisibility();
-        alert('Connexion réussie !');
-        // Scroll vers le forum après connexion
-        document.getElementById('forum').scrollIntoView({behavior: 'smooth'});
-      } else {
+      if (!email || !password) {
         alert('Veuillez remplir tous les champs.');
+        return;
       }
+      playDoorSound();
+      localStorage.setItem('luciferiumUser', JSON.stringify({ email: email, loggedIn: true }));
+      updateUI();
+      alert('Connexion réussie !');
     });
 
-    function updateForumVisibility() {
-      const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
-      const forumArea = document.getElementById('forumArea');
-      const forumLocked = document.getElementById('forumLocked');
-      if (userData && userData.loggedIn) {
-        forumArea.classList.remove('hidden');
-        forumLocked.classList.add('hidden');
-      } else {
-        forumArea.classList.add('hidden');
-        forumLocked.classList.remove('hidden');
-      }
-    }
-
+    // Gestion messages forum
     function displayMessages() {
-      const messagesList = document.getElementById('messagesList');
+      const messagesList = document.getElementById('forumArea');
       let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
 
       if (messages.length === 0) {
@@ -346,28 +389,32 @@
       messages.sort((a, b) => new Date(a.date) - new Date(b.date));
       messagesList.innerHTML = '';
 
-      messages.forEach(msg => {
+      messages.forEach((msg) => {
         const msgDiv = document.createElement('div');
-        msgDiv.style.borderBottom = '1px solid #333';
+        msgDiv.style.borderBottom = '1px solid #550000';
         msgDiv.style.padding = '0.3rem 0';
 
         const date = new Date(msg.date);
         const dateStr = date.toLocaleString();
 
-        msgDiv.innerHTML = `<strong>${msg.pseudo}</strong> <em style="font-size:0.8rem; color:#888;">(${dateStr})</em><br>${escapeHtml(msg.text)}`;
+        msgDiv.innerHTML = `<strong>${msg.pseudo}</strong> <em style="font-size:0.8rem; color:#aa6666;">(${dateStr})</em><br>${escapeHtml(
+          msg.text
+        )}`;
         messagesList.appendChild(msgDiv);
       });
 
       messagesList.scrollTop = messagesList.scrollHeight;
     }
 
+    // Protection contre l'injection HTML dans les messages
     function escapeHtml(text) {
       const div = document.createElement('div');
       div.textContent = text;
       return div.innerHTML;
     }
 
-    document.getElementById('messageForm').addEventListener('submit', function(e) {
+    // Envoi message forum
+    document.getElementById('messageForm').addEventListener('submit', function (e) {
       e.preventDefault();
 
       const messageInput = document.getElementById('messageInput');
@@ -384,7 +431,7 @@
       const newMsg = {
         pseudo,
         text,
-        date: new Date().toISOString()
+        date: new Date().toISOString(),
       };
 
       let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
@@ -395,10 +442,17 @@
       displayMessages();
     });
 
-    // Initialisation
-    updateUI();
-    updateForumVisibility();
-    displayMessages();
+    // Initialisation interface au chargement
+    window.addEventListener('load', () => {
+      updateUI();
+      displayMessages();
+    });
+
+    // Clic bouton connexion (jouer son + afficher formulaire)
+    document.getElementById('loginBtn').addEventListener('click', () => {
+      playDoorSound();
+      showConnexion();
+    });
   </script>
 </body>
 </html>

@@ -185,100 +185,124 @@
   </div>
 
   <script>
-    function togglePassword() {
-      const pwd = document.getElementById('password');
-      pwd.type = pwd.type === 'password' ? 'text' : 'password';
+   <script>
+  function togglePassword() {
+    const pwd = document.getElementById('password');
+    pwd.type = pwd.type === 'password' ? 'text' : 'password';
+  }
+
+  // Formulaire de connexion
+  document.querySelector('form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const emailInput = document.querySelector('input[type="email"]');
+    const passwordInput = document.querySelector('input[type="password"]');
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    if (!email || !password) {
+      alert("Veuillez entrer un email et un mot de passe.");
+      return;
     }
 
-    function displayMessages() {
-      const messagesList = document.getElementById('messagesList');
-      let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
+    // Simule la connexion (sans base de données)
+    const userData = {
+      email,
+      loggedIn: true
+    };
+    localStorage.setItem('luciferiumUser', JSON.stringify(userData));
 
-      if (messages.length === 0) {
-        messagesList.innerHTML = '<p>Aucun message pour le moment. Soyez le premier à écrire !</p>';
-        return;
-      }
+    alert("Connexion réussie !");
+    updateUI();
+  });
 
-      messages.sort((a, b) => new Date(a.date) - new Date(b.date));
+  // Fonction d'affichage des messages
+  function displayMessages() {
+    const messagesList = document.getElementById('messagesList');
+    let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
 
-      messagesList.innerHTML = '';
-      messages.forEach(msg => {
-        const msgDiv = document.createElement('div');
-        msgDiv.style.borderBottom = '1px solid #333';
-        msgDiv.style.padding = '0.3rem 0';
-
-        const date = new Date(msg.date);
-        const dateStr = date.toLocaleString();
-
-        msgDiv.innerHTML = `<strong>${msg.pseudo}</strong> <em style="font-size:0.8rem; color:#888;">(${dateStr})</em><br>${escapeHtml(msg.text)}`;
-
-        messagesList.appendChild(msgDiv);
-      });
-
-      messagesList.scrollTop = messagesList.scrollHeight;
+    if (messages.length === 0) {
+      messagesList.innerHTML = '<p>Aucun message pour le moment. Soyez le premier à écrire !</p>';
+      return;
     }
 
-    function escapeHtml(text) {
+    messages.sort((a, b) => new Date(a.date) - new Date(b.date));
+    messagesList.innerHTML = '';
+
+    messages.forEach(msg => {
       const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
+      div.style.borderBottom = '1px solid #333';
+      div.style.padding = '0.3rem 0';
 
-    document.getElementById('messageForm').addEventListener('submit', function(e) {
-      e.preventDefault();
+      const date = new Date(msg.date).toLocaleString();
+      div.innerHTML = `<strong>${msg.pseudo}</strong> <em style="font-size:0.8rem; color:#888;">(${date})</em><br>${escapeHtml(msg.text)}`;
 
-      const messageInput = document.getElementById('messageInput');
-      const text = messageInput.value.trim();
-      if (text.length === 0) return;
-
-      const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
-      if (!userData || !userData.loggedIn) {
-        alert('Vous devez être connecté pour poster un message.');
-        return;
-      }
-
-      const pseudo = userData.email.split('@')[0] || 'Anonyme';
-      const newMsg = {
-        pseudo,
-        text,
-        date: new Date().toISOString()
-      };
-
-      let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
-      messages.push(newMsg);
-      localStorage.setItem('luciferiumMessages', JSON.stringify(messages));
-
-      messageInput.value = '';
-      displayMessages();
+      messagesList.appendChild(div);
     });
 
-    function updateForumVisibility() {
-      const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
-      const forumArea = document.getElementById('forumArea');
-      const forumLocked = document.getElementById('forumLocked');
-      if (userData && userData.loggedIn) {
-        forumArea.classList.remove('hidden');
-        forumLocked.classList.add('hidden');
-      } else {
-        forumArea.classList.add('hidden');
-        forumLocked.classList.remove('hidden');
-      }
+    messagesList.scrollTop = messagesList.scrollHeight;
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // Envoi d'un message
+  const messageForm = document.getElementById('messageForm');
+  messageForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const messageInput = document.getElementById('messageInput');
+    const text = messageInput.value.trim();
+    if (!text) return;
+
+    const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
+    if (!userData || !userData.loggedIn) {
+      alert("Vous devez être connecté pour poster un message.");
+      return;
     }
 
-    // Ajoute la fonction updateUI si elle n'existe pas encore
-    if (typeof updateUI !== "function") {
-      var updateUI = function () {};
-    }
-
-    const originalUpdateUI = updateUI;
-    updateUI = function () {
-      originalUpdateUI();
-      updateForumVisibility();
+    const pseudo = userData.email.split('@')[0] || "Anonyme";
+    const newMsg = {
+      pseudo,
+      text,
+      date: new Date().toISOString()
     };
 
+    let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
+    messages.push(newMsg);
+    localStorage.setItem('luciferiumMessages', JSON.stringify(messages));
+
+    messageInput.value = '';
     displayMessages();
+  });
+
+  // Gère l'affichage forum selon connexion
+  function updateForumVisibility() {
+    const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
+    const forumArea = document.getElementById('forumArea');
+    const forumLocked = document.getElementById('forumLocked');
+
+    if (userData && userData.loggedIn) {
+      forumArea.style.display = 'block';
+      forumLocked.style.display = 'none';
+    } else {
+      forumArea.style.display = 'none';
+      forumLocked.style.display = 'block';
+    }
+  }
+
+  // Fonction appelée après connexion
+  function updateUI() {
     updateForumVisibility();
-  </script>
+    displayMessages();
+  }
+
+  // Initialisation au chargement
+  updateUI();
+</script>
 </body>
 </html>
 

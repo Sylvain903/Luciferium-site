@@ -7,7 +7,7 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background: #0b0b0b;
       color: #f2f2f2;
     }
@@ -21,7 +21,6 @@
       font-size: 2.5rem;
       color: #ff2e2e;
       letter-spacing: 3px;
-      margin: 0;
     }
     nav {
       display: flex;
@@ -29,6 +28,7 @@
       gap: 2rem;
       background: #111;
       padding: 1rem;
+      align-items: center;
     }
     nav a {
       color: #ccc;
@@ -38,131 +38,21 @@
     nav a:hover {
       color: #ff2e2e;
     }
-    .hero {
-      background: #0e0e0e;
-      padding: 4rem 2rem;
-      text-align: center;
-      border-bottom: 1px solid #222;
-    }
-    .hero h2 {
-      font-size: 2.2rem;
-      color: #fff;
-      text-shadow: 1px 1px 8px #000;
-      margin: 0 0 1rem;
-    }
-    .hero img {
-      max-width: 300px;
-      margin-bottom: 1rem;
-    }
-    .btn {
-      display: inline-block;
+    /* Bouton déconnexion aligné à droite */
+    #logoutBtn {
+      margin-left: auto;
       background: #ff2e2e;
       color: white;
-      padding: 0.8rem 1.2rem;
-      text-decoration: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 1rem;
-      user-select: none;
-    }
-    .section {
-      padding: 3rem 2rem;
-      max-width: 800px;
-      margin: auto;
-    }
-    .section h3 {
-      color: #ff2e2e;
-      font-size: 1.7rem;
-      margin-bottom: 1rem;
-    }
-    .footer {
-      background: #111;
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #666;
-      margin-top: 3rem;
-    }
-    form label {
-      display: block;
-      margin-bottom: 1rem;
-      font-weight: bold;
-    }
-    input, textarea {
-      padding: 0.5rem;
-      background: #222;
-      border: 1px solid #444;
-      border-radius: 4px;
-      color: #f2f2f2;
-      width: 100%;
-      box-sizing: border-box;
-      font-size: 1rem;
-      font-family: inherit;
-    }
-    button, .btn {
-      background: #ff2e2e;
       border: none;
-      padding: 0.8rem 1.2rem;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
+      padding: 0.5rem 1rem;
       border-radius: 5px;
-      font-size: 1rem;
-      user-select: none;
+      cursor: pointer;
+      font-weight: bold;
     }
-    button:hover, .btn:hover {
+    #logoutBtn:hover {
       background: #d92626;
     }
-    .password-container {
-      position: relative;
-    }
-    .toggle-password {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: #f2f2f2;
-      cursor: pointer;
-      font-size: 1.2rem;
-      user-select: none;
-    }
-    #forumArea {
-      max-width: 700px;
-      margin: 2rem auto;
-      padding: 1rem;
-      background: #111;
-      border: 2px solid #ff2e2e;
-      border-radius: 8px;
-      display: none;
-    }
-    #messagesList {
-      max-height: 300px;
-      overflow-y: auto;
-      border: 1px solid #444;
-      padding: 1rem;
-      background: #222;
-      color: #ddd;
-      border-radius: 5px;
-      margin-bottom: 1rem;
-      font-size: 0.9rem;
-      white-space: pre-wrap;
-    }
-    #forumLocked {
-      max-width: 700px;
-      margin: 2rem auto;
-      padding: 1rem;
-      background: #222;
-      color: #888;
-      text-align: center;
-      border-radius: 8px;
-      border: 1px solid #444;
-    }
-    .hidden {
-      display: none !important;
-    }
+    /* ...reste de ton CSS inchangé... */
   </style>
 </head>
 <body>
@@ -174,29 +64,26 @@
     <a href="#connexion">Connexion</a>
     <a href="#cadeaux">Cadeaux</a>
     <a href="#forum">Forum</a>
+    <button id="logoutBtn">Déconnexion</button>
   </nav>
 
-  <div class="hero" id="accueil">
-    <h2>Ouvrez les portes de l'ombre</h2>
-    <img src="https://via.placeholder.com/300x100?text=Luciferium+Logo" alt="Logo Luciferium" />
-    <button class="btn" onclick="document.getElementById('connexionSection').scrollIntoView({behavior:'smooth'});">Connexion / Inscription</button>
-  </div>
+  <!-- Ton contenu ici (hero, sections, forum, etc) -->
 
   <section id="univers" class="section">
     <h3>Bienvenue dans l'univers de Luciferium</h3>
     <p>Luciferium est une application unique mêlant mythe, spiritualité et interaction avec les forces de l'ombre. Une expérience sensorielle complète, appuyée par un forum, des cadeaux mystiques et une ambiance sonore ténébreuse.</p>
   </section>
 
-  <section id="connexionSection" class="section">
+  <section id="connexion" class="section">
     <h3>Connexion / Inscription</h3>
-    <form id="loginForm" autocomplete="off">
-      <label for="emailInput">Email :</label>
-      <input type="email" id="emailInput" required />
-      <label for="passwordInput">Mot de passe :</label>
-      <div class="password-container">
-        <input type="password" id="passwordInput" required />
-        <button type="button" class="toggle-password" onclick="togglePassword()">👁</button>
-      </div>
+    <form id="loginForm" action="#" method="post">
+      <label>Email : <input type="email" id="emailInput" required></label>
+      <label>Mot de passe :
+        <div class="password-container">
+          <input type="password" id="password" required>
+          <button type="button" class="toggle-password" onclick="togglePassword()">👁</button>
+        </div>
+      </label>
       <button type="submit">Se connecter / S'inscrire</button>
     </form>
   </section>
@@ -208,120 +95,98 @@
 
   <section id="forum" class="section">
     <h3>Forum</h3>
-    <div id="forumLocked">
-      <p>Vous devez être connecté pour accéder au forum.</p>
-    </div>
     <div id="forumArea">
-      <div id="messagesList">Aucun message pour le moment. Soyez le premier à écrire !</div>
+      <div id="messagesList" style="max-height:300px; overflow-y:auto; border:1px solid #444; padding:10px; background:#111; margin-bottom:1rem;"></div>
+
       <form id="messageForm">
         <label for="messageInput">Votre message :</label>
-        <textarea id="messageInput" rows="3" required></textarea>
-        <button type="submit">Envoyer</button>
+        <textarea id="messageInput" rows="3" required style="width:100%; background:#222; color:#f2f2f2; border:1px solid #444; border-radius:4px; padding:0.5rem;"></textarea>
+        <button type="submit" style="margin-top:0.5rem; background:#ff2e2e; color:#fff; border:none; padding:0.5rem 1rem; border-radius:4px; cursor:pointer;">Envoyer</button>
       </form>
-      <button id="logoutBtn" style="margin-top:1rem; background:#444; width:100%;">Déconnexion</button>
+    </div>
+
+    <div id="forumLocked" class="hidden">
+      <p>Vous devez être connecté pour accéder au forum.</p>
     </div>
   </section>
 
-  <footer class="footer">
+  <div class="footer">
     © 2025 Luciferium - Tous droits réservés.
-  </footer>
+  </div>
 
   <script>
-    // Toggle affichage mot de passe
     function togglePassword() {
-      const pwd = document.getElementById('passwordInput');
+      const pwd = document.getElementById('password');
       pwd.type = pwd.type === 'password' ? 'text' : 'password';
     }
 
-    const loginForm = document.getElementById('loginForm');
-    const emailInput = document.getElementById('emailInput');
-    const passwordInput = document.getElementById('passwordInput');
-    const forumArea = document.getElementById('forumArea');
-    const forumLocked = document.getElementById('forumLocked');
-    const logoutBtn = document.getElementById('logoutBtn');
-    const messagesList = document.getElementById('messagesList');
-    const messageForm = document.getElementById('messageForm');
-    const messageInput = document.getElementById('messageInput');
+    // Gestion bouton Déconnexion
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      localStorage.removeItem('luciferiumUser');
+      alert('Déconnecté !');
+      location.reload();
+    });
 
-    // Mise à jour interface en fonction connexion
-    function updateUI() {
-      const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
-      if (userData && userData.loggedIn) {
-        forumArea.style.display = 'block';
-        forumLocked.style.display = 'none';
-        loginForm.style.display = 'none';
-        displayMessages();
-      } else {
-        forumArea.style.display = 'none';
-        forumLocked.style.display = 'block';
-        loginForm.style.display = 'block';
+    // Fonction pour afficher les messages dans la liste
+    function displayMessages() {
+      const messagesList = document.getElementById('messagesList');
+      let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
+
+      if (messages.length === 0) {
+        messagesList.innerHTML = '<p>Aucun message pour le moment. Soyez le premier à écrire !</p>';
+        return;
       }
+
+      // On trie par date (la plus récente en bas)
+      messages.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+      messagesList.innerHTML = '';
+      messages.forEach(msg => {
+        const msgDiv = document.createElement('div');
+        msgDiv.style.borderBottom = '1px solid #333';
+        msgDiv.style.padding = '0.3rem 0';
+
+        const date = new Date(msg.date);
+        const dateStr = date.toLocaleString();
+
+        msgDiv.innerHTML = `<strong>${msg.pseudo}</strong> <em style="font-size:0.8rem; color:#888;">(${dateStr})</em><br>${escapeHtml(msg.text)}`;
+
+        messagesList.appendChild(msgDiv);
+      });
+
+      // Scroll vers le bas pour voir le dernier message
+      messagesList.scrollTop = messagesList.scrollHeight;
     }
 
-    // Echapper texte html dans messages
+    // Fonction pour échapper le html dans le message (sécurité basique)
     function escapeHtml(text) {
       const div = document.createElement('div');
       div.textContent = text;
       return div.innerHTML;
     }
 
-    // Afficher messages stockés
-    function displayMessages() {
-      let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
-      if (messages.length === 0) {
-        messagesList.innerHTML = 'Aucun message pour le moment. Soyez le premier à écrire !';
-        return;
-      }
-      messages.sort((a,b) => new Date(a.date) - new Date(b.date));
-      messagesList.innerHTML = '';
-      messages.forEach(msg => {
-        const msgDiv = document.createElement('div');
-        msgDiv.style.borderBottom = '1px solid #333';
-        msgDiv.style.padding = '0.3rem 0';
-        const date = new Date(msg.date);
-        const dateStr = date.toLocaleString();
-        msgDiv.innerHTML = `<strong>${escapeHtml(msg.pseudo)}</strong> <em style="font-size:0.8rem; color:#888;">(${dateStr})</em><br>${escapeHtml(msg.text)}`;
-        messagesList.appendChild(msgDiv);
-      });
-      messagesList.scrollTop = messagesList.scrollHeight;
-    }
-
-    // Gestion connexion formulaire
-    loginForm.addEventListener('submit', e => {
+    // Gestion de l'envoi de message
+    const messageForm = document.getElementById('messageForm');
+    messageForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      const email = emailInput.value.trim();
-      const password = passwordInput.value.trim();
 
-      if (!email || !password) {
-        alert('Merci de remplir tous les champs.');
-        return;
-      }
-      // Sauvegarde user en localstorage (connexion simulée)
-      localStorage.setItem('luciferiumUser', JSON.stringify({ email, loggedIn: true }));
-      alert(`Bienvenue ${email.split('@')[0]} !`);
-      updateUI();
-    });
-
-    // Déconnexion
-    logoutBtn.addEventListener('click', () => {
-      localStorage.removeItem('luciferiumUser');
-      alert('Vous êtes déconnecté.');
-      updateUI();
-    });
-
-    // Envoi message forum
-    messageForm.addEventListener('submit', e => {
-      e.preventDefault();
+      const messageInput = document.getElementById('messageInput');
       const text = messageInput.value.trim();
       if (text.length === 0) return;
 
+      // Récupérer l'utilisateur connecté
       const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
       if (!userData || !userData.loggedIn) {
         alert('Vous devez être connecté pour poster un message.');
         return;
       }
+
       const pseudo = userData.email.split('@')[0] || 'Anonyme';
-      const newMsg = { pseudo, text, date: new Date().toISOString() };
+      const newMsg = {
+        pseudo,
+        text,
+        date: new Date().toISOString()
+      };
 
       let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
       messages.push(newMsg);
@@ -331,8 +196,31 @@
       displayMessages();
     });
 
-    // Initialisation UI
-    updateUI();
+    // Afficher les messages au chargement
+    displayMessages();
+
+    // Afficher ou cacher le forum selon si l'utilisateur est connecté
+    function updateForumVisibility() {
+      const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
+      const forumArea = document.getElementById('forumArea');
+      const forumLocked = document.getElementById('forumLocked');
+      if (userData && userData.loggedIn) {
+        forumArea.classList.remove('hidden');
+        forumLocked.classList.add('hidden');
+      } else {
+        forumArea.classList.add('hidden');
+        forumLocked.classList.remove('hidden');
+      }
+    }
+    updateForumVisibility();
+
+    // Mettre à jour la visibilité quand on se connecte ou déconnecte
+    const originalUpdateUI = typeof updateUI === 'function' ? updateUI : () => {};
+    updateUI = function() {
+      originalUpdateUI();
+      updateForumVisibility();
+    };
   </script>
 </body>
 </html>
+

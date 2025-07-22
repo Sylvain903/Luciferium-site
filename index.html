@@ -311,5 +311,98 @@
     // Au chargement de la page, on met à jour l'interface
     updateUI();
   </script>
+  // Fonction pour afficher les messages dans la liste
+function displayMessages() {
+  const messagesList = document.getElementById('messagesList');
+  let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
+
+  if (messages.length === 0) {
+    messagesList.innerHTML = '<p>Aucun message pour le moment. Soyez le premier à écrire !</p>';
+    return;
+  }
+
+  // On trie par date (la plus récente en bas)
+  messages.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  messagesList.innerHTML = '';
+  messages.forEach(msg => {
+    const msgDiv = document.createElement('div');
+    msgDiv.style.borderBottom = '1px solid #333';
+    msgDiv.style.padding = '0.3rem 0';
+
+    const date = new Date(msg.date);
+    const dateStr = date.toLocaleString();
+
+    msgDiv.innerHTML = `<strong>${msg.pseudo}</strong> <em style="font-size:0.8rem; color:#888;">(${dateStr})</em><br>${escapeHtml(msg.text)}`;
+
+    messagesList.appendChild(msgDiv);
+  });
+
+  // Scroll vers le bas pour voir le dernier message
+  messagesList.scrollTop = messagesList.scrollHeight;
+}
+
+// Fonction pour échapper le html dans le message (sécurité basique)
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// Gestion de l'envoi de message
+const messageForm = document.getElementById('messageForm');
+messageForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const messageInput = document.getElementById('messageInput');
+  const text = messageInput.value.trim();
+  if (text.length === 0) return;
+
+  // Récupérer l'utilisateur connecté
+  const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
+  if (!userData || !userData.loggedIn) {
+    alert('Vous devez être connecté pour poster un message.');
+    return;
+  }
+
+  const pseudo = userData.email.split('@')[0] || 'Anonyme';
+  const newMsg = {
+    pseudo,
+    text,
+    date: new Date().toISOString()
+  };
+
+  let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
+  messages.push(newMsg);
+  localStorage.setItem('luciferiumMessages', JSON.stringify(messages));
+
+  messageInput.value = '';
+  displayMessages();
+});
+
+// Afficher les messages au chargement
+displayMessages();
+
+// Afficher ou cacher le forum selon si l'utilisateur est connecté
+function updateForumVisibility() {
+  const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
+  const forumArea = document.getElementById('forumArea');
+  const forumLocked = document.getElementById('forumLocked');
+  if (userData && userData.loggedIn) {
+    forumArea.classList.remove('hidden');
+    forumLocked.classList.add('hidden');
+  } else {
+    forumArea.classList.add('hidden');
+    forumLocked.classList.remove('hidden');
+  }
+}
+updateForumVisibility();
+
+// Mettre à jour la visibilité quand on se connecte ou déconnecte
+const originalUpdateUI = updateUI;
+updateUI = function() {
+  originalUpdateUI();
+  updateForumVisibility();
+};
 </body>
 </html>

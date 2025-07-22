@@ -222,18 +222,18 @@
       pwd.type = pwd.type === 'password' ? 'text' : 'password';
     }
 
-    // Son porte qui grince
+    // Joue le son au clic sur le bouton (indépendant du formulaire)
     const doorSound = document.getElementById('doorSound');
     const loginBtn = document.getElementById('loginBtn');
-
     loginBtn.addEventListener('click', () => {
       doorSound.currentTime = 0;
-      doorSound.play();
+      doorSound.play().catch(() => {
+        // Peut échouer si clic non autorisé par navigateur, silencieux ok
+      });
     });
 
     // Gestion de connexion/inscription simulée avec stockage localStorage
     const loginForm = document.getElementById('loginForm');
-
     loginForm.addEventListener('submit', function (e) {
       e.preventDefault();
 
@@ -245,7 +245,7 @@
         return;
       }
 
-      // Simuler stockage utilisateur connecté
+      // Stockage user connecté
       const userData = {
         email: email,
         loggedIn: true,
@@ -261,7 +261,6 @@
     function updateUI() {
       const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
 
-      // Cacher ou afficher section connexion
       const connexionSection = document.getElementById('connexion');
       if (userData && userData.loggedIn) {
         connexionSection.classList.add('hidden');
@@ -269,12 +268,10 @@
         connexionSection.classList.remove('hidden');
       }
 
-      // Afficher pseudo dans header nav (facultatif)
-      // Afficher ou cacher forum
       updateForumVisibility();
     }
 
-    // Afficher ou cacher le forum selon si l'utilisateur est connecté
+    // Affiche ou cache le forum selon connexion
     function updateForumVisibility() {
       const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
       const forumArea = document.getElementById('forumArea');
@@ -299,7 +296,6 @@
         return;
       }
 
-      // Trier par date croissante
       messages.sort((a, b) => new Date(a.date) - new Date(b.date));
 
       messagesList.innerHTML = '';
@@ -316,7 +312,6 @@
         messagesList.appendChild(msgDiv);
       });
 
-      // Scroll vers le bas
       messagesList.scrollTop = messagesList.scrollHeight;
     }
 
@@ -373,9 +368,10 @@
       newsletterForm.reset();
     });
 
-    // Initialisation interface au chargement
+    // Initialisation
     updateUI();
     displayMessages();
   </script>
 </body>
 </html>
+

@@ -1,72 +1,404 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Test Sons et Déconnexion</title>
-<style>
-  body { background: #111; color: white; font-family: sans-serif; padding: 2rem; }
-  button { font-size: 1.2rem; padding: 0.5rem 1rem; margin: 0.5rem; cursor: pointer; }
-  #logoutBtn { display: none; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Luciferium</title>
+  <style>
+    /* Styles inchangés + ajout du background infernal */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #f2f2f2;
+      overflow-y: scroll;
+    }
+    /* Background overlay pour nuancer en sombre rouge/noir */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(30, 0, 0, 0.7);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    header {
+      background: rgba(22, 22, 22, 0.85);
+      padding: 1rem 2rem;
+      text-align: center;
+      border-bottom: 1px solid #333;
+      position: relative;
+      z-index: 10;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #ff2e2e;
+      letter-spacing: 3px;
+    }
+    .logout-button {
+      position: absolute;
+      top: 1rem;
+      right: 2rem;
+      background: #ff2e2e;
+      border: none;
+      padding: 0.5rem 1rem;
+      color: white;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      z-index: 11;
+    }
+    .logout-button:hover {
+      background: #d92626;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      background: rgba(17, 17, 17, 0.85);
+      padding: 1rem;
+      position: relative;
+      z-index: 10;
+    }
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #ff2e2e;
+    }
+    .hero {
+      background: rgba(14, 14, 14, 0.85);
+      padding: 4rem 2rem;
+      text-align: center;
+      border-bottom: 1px solid #222;
+      position: relative;
+      z-index: 9;
+    }
+    .hero h2 {
+      font-size: 2.2rem;
+      color: #fff;
+      text-shadow: 1px 1px 8px #000;
+    }
+    .section {
+      padding: 3rem 2rem;
+      max-width: 800px;
+      margin: auto;
+      background: rgba(20, 0, 0, 0.65);
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 8;
+    }
+    .section h3 {
+      color: #ff2e2e;
+      font-size: 1.7rem;
+      margin-bottom: 1rem;
+    }
+    .footer {
+      background: rgba(17, 17, 17, 0.85);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #666;
+      position: relative;
+      z-index: 9;
+    }
+    .btn {
+      display: inline-block;
+      background: #ff2e2e;
+      color: white;
+      padding: 0.8rem 1.2rem;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 1rem;
+      cursor: pointer;
+      border: none;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    form label {
+      display: block;
+      margin-bottom: 1rem;
+    }
+    input, textarea {
+      padding: 0.5rem;
+      background: #222;
+      border: 1px solid #444;
+      border-radius: 4px;
+      color: #f2f2f2;
+      width: 100%;
+      font-size: 1rem;
+    }
+    button {
+      background: #ff2e2e;
+      border: none;
+      padding: 0.6rem 1rem;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background: #d92626;
+    }
+    .password-container {
+      position: relative;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #f2f2f2;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+    .logo-img {
+      display: block;
+      margin: 1rem auto 2rem;
+      max-width: 300px;
+      position: relative;
+      z-index: 10;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>LUCIFERIUM</h1>
+    <button class="logout-button hidden" onclick="playScreamAndLogout()">Déconnexion</button>
+  </header>
+  <nav>
+    <a href="#univers">L'univers</a>
+    <a href="#connexion">Connexion</a>
+    <a href="#cadeaux">Cadeaux</a>
+    <a href="#forum">Forum</a>
+  </nav>
 
-<button id="loginBtn">Connexion</button>
-<button id="logoutBtn">Déconnexion</button>
+  <div class="hero">
+    <h2>Ouvrez les portes de l'ombre</h2>
+    <img src="https://via.placeholder.com/300x100?text=Luciferium+Logo" alt="Logo Luciferium" class="logo-img" />
+    <button id="btnConnexion" class="btn">Connexion / Inscription</button>
+  </div>
 
-<audio id="doorSound" src="https://actions.google.com/sounds/v1/doors/door_creak_long.ogg" preload="auto"></audio>
-<audio id="screamSound" src="https://actions.google.com/sounds/v1/human_voices/scream_female_short.ogg" preload="auto"></audio>
+  <section id="univers" class="section">
+    <h3>Bienvenue dans l'univers de Luciferium</h3>
+    <p>Luciferium est une application unique mêlant mythe, spiritualité et interaction avec les forces de l'ombre. Une expérience sensorielle complète, appuyée par un forum, des cadeaux mystiques et une ambiance sonore ténébreuse.</p>
+  </section>
 
-<script>
-  const loginBtn = document.getElementById('loginBtn');
-  const logoutBtn = document.getElementById('logoutBtn');
-  const doorSound = document.getElementById('doorSound');
-  const screamSound = document.getElementById('screamSound');
+  <section id="connexion" class="section hidden">
+    <h3>Connexion / Inscription</h3>
+    <form id="loginForm">
+      <label>Email :
+        <input type="email" id="email" required autocomplete="username" />
+      </label>
+      <label>Mot de passe :
+        <div class="password-container">
+          <input type="password" id="password" required autocomplete="current-password" />
+          <button type="button" class="toggle-password" onclick="togglePassword()">👁</button>
+        </div>
+      </label>
+      <button type="submit">Se connecter / S'inscrire</button>
+    </form>
+  </section>
 
-  function playSound(audioEl) {
-    audioEl.currentTime = 0;
-    const p = audioEl.play();
-    if (p !== undefined) {
-      p.catch(err => console.log("Erreur lecture son :", err));
+  <section id="cadeaux" class="section">
+    <h3>Cadeaux & Codes Mystiques</h3>
+    <p>Des codes seront distribués à nos fidèles pour débloquer des secrets cachés dans l'application. Activez-les dans votre compte pour bénéficier de bonus exclusifs.</p>
+  </section>
+
+  <section id="forum" class="section hidden">
+    <h3>Forum</h3>
+    <div id="forumArea">
+      <div id="messagesList" style="max-height:300px; overflow-y:auto; border:1px solid #444; padding:10px; background:#111; margin-bottom:1rem;"></div>
+      <form id="messageForm">
+        <label for="messageInput">Votre message :</label>
+        <textarea id="messageInput" rows="3" required style="width:100%; background:#222; color:#f2f2f2; border:1px solid #444; border-radius:4px; padding:0.5rem;"></textarea>
+        <button type="submit" style="margin-top:0.5rem; background:#ff2e2e; color:#fff; border:none; padding:0.5rem 1rem; border-radius:4px; cursor:pointer;">Envoyer</button>
+      </form>
+    </div>
+    <div id="forumLocked" class="hidden">
+      <p>Vous devez être connecté pour accéder au forum.</p>
+    </div>
+  </section>
+
+  <div class="footer">
+    © 2025 Luciferium - Tous droits réservés.
+  </div>
+
+  <!-- Sons -->
+  <audio id="doorSound" src="https://actions.google.com/sounds/v1/doors/door_creak_long.ogg" preload="auto"></audio>
+  <audio id="screamSound" src="https://actions.google.com/sounds/v1/human_voices/scream_female_short.ogg" preload="auto"></audio>
+
+  <script>
+    function togglePassword() {
+      const pwd = document.getElementById('password');
+      pwd.type = pwd.type === 'password' ? 'text' : 'password';
     }
-  }
 
-  loginBtn.addEventListener('click', () => {
-    console.log("Clic Connexion - lancement son porte");
-    playSound(doorSound);
-    // Simuler connexion
-    localStorage.setItem('user', JSON.stringify({loggedIn: true}));
-    loginBtn.style.display = 'none';
-    logoutBtn.style.display = 'inline-block';
-  });
-
-  logoutBtn.addEventListener('click', () => {
-    console.log("Clic Déconnexion - lancement son cri");
-    playSound(screamSound);
-    // Déconnexion après fin du son
-    screamSound.onended = () => {
-      console.log("Son cri fini, déconnexion effective");
-      localStorage.removeItem('user');
-      loginBtn.style.display = 'inline-block';
-      logoutBtn.style.display = 'none';
+    function playDoorSound() {
+      const doorSound = document.getElementById('doorSound');
+      doorSound.currentTime = 0;
+      doorSound.play();
     }
-  });
 
-  // Au chargement, afficher bon bouton selon état login
-  window.onload = () => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user && user.loggedIn) {
-      loginBtn.style.display = 'none';
-      logoutBtn.style.display = 'inline-block';
-      console.log("Utilisateur déjà connecté");
-    } else {
-      loginBtn.style.display = 'inline-block';
-      logoutBtn.style.display = 'none';
-      console.log("Utilisateur non connecté");
+    function playScreamAndLogout() {
+      const screamSound = document.getElementById('screamSound');
+      screamSound.currentTime = 0;
+      screamSound.play();
+      screamSound.onended = () => {
+        logout();
+      };
     }
-  };
-</script>
 
+    function logout() {
+      localStorage.removeItem('luciferiumUser');
+      updateUI();
+      updateForumVisibility();
+      // Après déconnexion, retour en haut de page
+      window.scrollTo(0, 0);
+    }
+
+    function updateUI() {
+      const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
+      const logoutBtn = document.querySelector('.logout-button');
+      const forumSection = document.getElementById('forum');
+      const connexionSection = document.getElementById('connexion');
+      const heroSection = document.querySelector('.hero');
+      const cadeauxSection = document.getElementById('cadeaux');
+      const btnConnexion = document.getElementById('btnConnexion');
+
+      if (userData && userData.loggedIn) {
+        logoutBtn.classList.remove('hidden');
+        forumSection.classList.remove('hidden');
+        connexionSection.classList.add('hidden');
+        heroSection.classList.add('hidden');
+        cadeauxSection.classList.remove('hidden');
+        btnConnexion.classList.add('hidden');
+      } else {
+        logoutBtn.classList.add('hidden');
+        forumSection.classList.add('hidden');
+        connexionSection.classList.add('hidden');
+        heroSection.classList.remove('hidden');
+        cadeauxSection.classList.remove('hidden');
+        btnConnexion.classList.remove('hidden');
+      }
+    }
+
+    document.getElementById('btnConnexion').addEventListener('click', () => {
+      playDoorSound();
+      // Afficher la section connexion / inscription
+      document.getElementById('connexion').classList.remove('hidden');
+      // Cacher la section hero et bouton connexion
+      document.querySelector('.hero').classList.add('hidden');
+      document.getElementById('btnConnexion').classList.add('hidden');
+      // Scroll vers la section connexion
+      document.getElementById('connexion').scrollIntoView({behavior: 'smooth'});
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      if (email && password) {
+        // Enregistre user
+        localStorage.setItem('luciferiumUser', JSON.stringify({ email: email, loggedIn: true }));
+        updateUI();
+        updateForumVisibility();
+        alert('Connexion réussie !');
+        // Scroll vers le forum après connexion
+        document.getElementById('forum').scrollIntoView({behavior: 'smooth'});
+      } else {
+        alert('Veuillez remplir tous les champs.');
+      }
+    });
+
+    function updateForumVisibility() {
+      const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
+      const forumArea = document.getElementById('forumArea');
+      const forumLocked = document.getElementById('forumLocked');
+      if (userData && userData.loggedIn) {
+        forumArea.classList.remove('hidden');
+        forumLocked.classList.add('hidden');
+      } else {
+        forumArea.classList.add('hidden');
+        forumLocked.classList.remove('hidden');
+      }
+    }
+
+    function displayMessages() {
+      const messagesList = document.getElementById('messagesList');
+      let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
+
+      if (messages.length === 0) {
+        messagesList.innerHTML = '<p>Aucun message pour le moment. Soyez le premier à écrire !</p>';
+        return;
+      }
+
+      messages.sort((a, b) => new Date(a.date) - new Date(b.date));
+      messagesList.innerHTML = '';
+
+      messages.forEach(msg => {
+        const msgDiv = document.createElement('div');
+        msgDiv.style.borderBottom = '1px solid #333';
+        msgDiv.style.padding = '0.3rem 0';
+
+        const date = new Date(msg.date);
+        const dateStr = date.toLocaleString();
+
+        msgDiv.innerHTML = `<strong>${msg.pseudo}</strong> <em style="font-size:0.8rem; color:#888;">(${dateStr})</em><br>${escapeHtml(msg.text)}`;
+        messagesList.appendChild(msgDiv);
+      });
+
+      messagesList.scrollTop = messagesList.scrollHeight;
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    document.getElementById('messageForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const messageInput = document.getElementById('messageInput');
+      const text = messageInput.value.trim();
+      if (text.length === 0) return;
+
+      const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
+      if (!userData || !userData.loggedIn) {
+        alert('Vous devez être connecté pour poster un message.');
+        return;
+      }
+
+      const pseudo = userData.email.split('@')[0] || 'Anonyme';
+      const newMsg = {
+        pseudo,
+        text,
+        date: new Date().toISOString()
+      };
+
+      let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
+      messages.push(newMsg);
+      localStorage.setItem('luciferiumMessages', JSON.stringify(messages));
+
+      messageInput.value = '';
+      displayMessages();
+    });
+
+    // Initialisation
+    updateUI();
+    updateForumVisibility();
+    displayMessages();
+  </script>
 </body>
 </html>

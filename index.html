@@ -143,7 +143,7 @@
   <div class="hero">
     <h2>Ouvrez les portes de l'ombre</h2>
     <img src="https://via.placeholder.com/300x100?text=Luciferium+Logo" alt="Logo Luciferium" class="logo-img" />
-    <a href="#connexion" class="btn">Connexion / Inscription</a>
+    <!-- bouton "Connexion / Inscription" retiré ici -->
   </div>
 
   <section id="univers" class="section">
@@ -173,7 +173,7 @@
   <section id="forum" class="section">
     <h3>Forum</h3>
 
-    <div id="forumArea">
+    <div id="forumArea" style="display:none;">
       <div
         id="messagesList"
         style="max-height:300px; overflow-y:auto; border:1px solid #444; padding:10px; background:#111; margin-bottom:1rem;"
@@ -196,7 +196,7 @@
       </form>
     </div>
 
-    <div id="forumLocked" style="display:none;">
+    <div id="forumLocked" >
       <p>Vous devez être connecté pour accéder au forum.</p>
     </div>
   </section>
@@ -228,93 +228,4 @@
       const userData = { email, loggedIn: true };
       localStorage.setItem('luciferiumUser', JSON.stringify(userData));
 
-      alert('Connexion réussie !');
-      updateForumVisibility();
-      displayMessages();
-    });
-
-    // Fonction pour échapper le html dans les messages (sécurité basique)
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
-
-    // Affichage des messages
-    function displayMessages() {
-      const messagesList = document.getElementById('messagesList');
-      let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
-
-      if (messages.length === 0) {
-        messagesList.innerHTML =
-          '<p>Aucun message pour le moment. Soyez le premier à écrire !</p>';
-        return;
-      }
-
-      messages.sort((a, b) => new Date(a.date) - new Date(b.date));
-      messagesList.innerHTML = '';
-
-      messages.forEach((msg) => {
-        const div = document.createElement('div');
-        div.style.borderBottom = '1px solid #333';
-        div.style.padding = '0.3rem 0';
-
-        const dateStr = new Date(msg.date).toLocaleString();
-        div.innerHTML = `<strong>${msg.pseudo}</strong> <em style="font-size:0.8rem; color:#888;">(${dateStr})</em><br>${escapeHtml(
-          msg.text
-        )}`;
-
-        messagesList.appendChild(div);
-      });
-
-      messagesList.scrollTop = messagesList.scrollHeight;
-    }
-
-    // Gestion de l'envoi d'un message dans le forum
-    document.getElementById('messageForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const messageInput = document.getElementById('messageInput');
-      const text = messageInput.value.trim();
-      if (!text) return;
-
-      const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
-      if (!userData || !userData.loggedIn) {
-        alert('Vous devez être connecté pour poster un message.');
-        return;
-      }
-
-      const pseudo = userData.email.split('@')[0] || 'Anonyme';
-      const newMsg = { pseudo, text, date: new Date().toISOString() };
-
-      let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
-      messages.push(newMsg);
-      localStorage.setItem('luciferiumMessages', JSON.stringify(messages));
-
-      messageInput.value = '';
-      displayMessages();
-    });
-
-    // Gère l'affichage du forum selon l'état de connexion
-    function updateForumVisibility() {
-      const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
-      const forumArea = document.getElementById('forumArea');
-      const forumLocked = document.getElementById('forumLocked');
-
-      if (userData && userData.loggedIn) {
-        forumArea.style.display = 'block';
-        forumLocked.style.display = 'none';
-      } else {
-        forumArea.style.display = 'none';
-        forumLocked.style.display = 'block';
-      }
-    }
-
-    // Initialisation au chargement
-    updateForumVisibility();
-    displayMessages();
-  </script>
-</body>
-</html>
-
-
+      alert('Conn

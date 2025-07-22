@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Luciferium</title>
   <style>
-    /* Styles inchangés + ajout du background infernal */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -14,7 +13,6 @@
       color: #f2f2f2;
       overflow-y: scroll;
     }
-    /* Background overlay pour nuancer en sombre rouge/noir */
     body::before {
       content: "";
       position: fixed;
@@ -174,7 +172,7 @@
 <body>
   <header>
     <h1>LUCIFERIUM</h1>
-    <button class="logout-button hidden" onclick="playScreamAndLogout()">Déconnexion</button>
+    <button class="logout-button hidden" id="btnLogout">Déconnexion</button>
   </header>
   <nav>
     <a href="#univers">L'univers</a>
@@ -239,37 +237,56 @@
   <audio id="screamSound" src="https://actions.google.com/sounds/v1/human_voices/scream_female_short.ogg" preload="auto"></audio>
 
   <script>
+    // Toggle mot de passe visible/invisible
     function togglePassword() {
       const pwd = document.getElementById('password');
       pwd.type = pwd.type === 'password' ? 'text' : 'password';
     }
 
-    function playDoorSound() {
-      const doorSound = document.getElementById('doorSound');
-      doorSound.currentTime = 0;
-      doorSound.play();
+    // Lecture sonore sécurisée (avec catch des erreurs)
+    function playSound(audioElement) {
+      audioElement.currentTime = 0;
+      const playPromise = audioElement.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          // On peut logger ou ignorer l'erreur (souvent autoplay bloqué)
+          console.log('Erreur lecture son:', error);
+        });
+      }
     }
 
-    function playScreamAndLogout() {
+    // Au clic sur Connexion, jouer son de porte et afficher connexion
+    document.getElementById('btnConnexion').addEventListener('click', () => {
+      const doorSound = document.getElementById('doorSound');
+      playSound(doorSound);
+      // Afficher section connexion, cacher hero et bouton connexion
+      document.getElementById('connexion').classList.remove('hidden');
+      document.querySelector('.hero').classList.add('hidden');
+      document.getElementById('btnConnexion').classList.add('hidden');
+      // Scroll smooth vers la connexion
+      document.getElementById('connexion').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Déconnexion avec son de cri puis logout après fin son
+    document.getElementById('btnLogout').addEventListener('click', () => {
       const screamSound = document.getElementById('screamSound');
-      screamSound.currentTime = 0;
-      screamSound.play();
+      playSound(screamSound);
       screamSound.onended = () => {
         logout();
       };
-    }
+    });
 
     function logout() {
       localStorage.removeItem('luciferiumUser');
       updateUI();
       updateForumVisibility();
-      // Après déconnexion, retour en haut de page
+      // Scroll en haut
       window.scrollTo(0, 0);
     }
 
     function updateUI() {
       const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
-      const logoutBtn = document.querySelector('.logout-button');
+      const logoutBtn = document.getElementById('btnLogout');
       const forumSection = document.getElementById('forum');
       const connexionSection = document.getElementById('connexion');
       const heroSection = document.querySelector('.hero');
@@ -293,29 +310,16 @@
       }
     }
 
-    document.getElementById('btnConnexion').addEventListener('click', () => {
-      playDoorSound();
-      // Afficher la section connexion / inscription
-      document.getElementById('connexion').classList.remove('hidden');
-      // Cacher la section hero et bouton connexion
-      document.querySelector('.hero').classList.add('hidden');
-      document.getElementById('btnConnexion').classList.add('hidden');
-      // Scroll vers la section connexion
-      document.getElementById('connexion').scrollIntoView({behavior: 'smooth'});
-    });
-
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value.trim();
       if (email && password) {
-        // Enregistre user
         localStorage.setItem('luciferiumUser', JSON.stringify({ email: email, loggedIn: true }));
         updateUI();
         updateForumVisibility();
         alert('Connexion réussie !');
-        // Scroll vers le forum après connexion
-        document.getElementById('forum').scrollIntoView({behavior: 'smooth'});
+        document.getElementById('forum').scrollIntoView({ behavior: 'smooth' });
       } else {
         alert('Veuillez remplir tous les champs.');
       }

@@ -3,124 +3,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Luciferium</title>
+  <title>Luciferium - Connexion & Forum</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #0b0b0b;
+      background-color: #0b0b0b;
       color: #f2f2f2;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; padding: 2rem;
     }
     header {
-      background: #161616;
-      padding: 1rem 2rem;
       text-align: center;
+      padding-bottom: 1rem;
       border-bottom: 1px solid #333;
     }
-    header h1 {
-      font-size: 2.5rem;
+    h1 {
       color: #ff2e2e;
       letter-spacing: 3px;
     }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      background: #111;
-      padding: 1rem;
+    form {
+      max-width: 400px;
+      margin: 2rem auto;
+      background: #121212;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #ff2e2e;
     }
-    nav a {
-      color: #ccc;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    nav a:hover {
-      color: #ff2e2e;
-    }
-    .hero {
-      background: #0e0e0e;
-      padding: 4rem 2rem;
-      text-align: center;
-      border-bottom: 1px solid #222;
-    }
-    .hero h2 {
-      font-size: 2.2rem;
-      color: #fff;
-      text-shadow: 1px 1px 8px #000;
-    }
-    .section {
-      padding: 3rem 2rem;
-      max-width: 800px;
-      margin: auto;
-    }
-    .section h3 {
-      color: #ff2e2e;
-      font-size: 1.7rem;
-      margin-bottom: 1rem;
-    }
-    .footer {
-      background: #111;
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #666;
-    }
-    .btn {
-      display: inline-block;
-      background: #ff2e2e;
-      color: white;
-      padding: 0.8rem 1.2rem;
-      text-decoration: none;
-      border-radius: 5px;
-      margin-top: 1rem;
-      cursor: pointer;
-      border: none;
-      font-weight: bold;
-      font-size: 1rem;
-    }
-    form label {
+    label {
       display: block;
       margin-bottom: 1rem;
     }
-    input {
-      padding: 0.5rem;
-      background: #222;
-      border: 1px solid #444;
-      border-radius: 4px;
-      color: #f2f2f2;
+    input[type="email"],
+    input[type="password"] {
       width: 100%;
-      box-sizing: border-box;
+      padding: 0.5rem;
+      border-radius: 4px;
+      border: 1px solid #444;
+      background-color: #222;
+      color: #f2f2f2;
     }
     button {
-      background: #ff2e2e;
+      background-color: #ff2e2e;
       border: none;
-      padding: 0.6rem 1rem;
       color: white;
       font-weight: bold;
+      padding: 0.7rem 1.2rem;
       cursor: pointer;
-      border-radius: 4px;
+      border-radius: 5px;
+      width: 100%;
+      font-size: 1rem;
+      margin-top: 1rem;
     }
     button:hover {
-      background: #d92626;
+      background-color: #d92626;
     }
-    .password-container {
-      position: relative;
+    #forumArea {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: #111;
+      border: 2px solid #ff2e2e;
+      border-radius: 8px;
+      display: none;
     }
-    .toggle-password {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: #f2f2f2;
-      cursor: pointer;
-      font-size: 1.1rem;
+    #forumArea h2 {
+      color: #ff2e2e;
+      margin-bottom: 1rem;
+      text-align: center;
     }
-    .logo-img {
-      display: block;
-      margin: 1rem auto 2rem;
-      max-width: 300px;
+    #messagesList {
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #444;
+      padding: 1rem;
+      background: #222;
+      color: #ddd;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    #forumLocked {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: #222;
+      color: #888;
+      text-align: center;
+      border-radius: 8px;
+      border: 1px solid #444;
     }
     .hidden {
       display: none;
@@ -128,208 +97,97 @@
   </style>
 </head>
 <body>
+
   <header>
     <h1>LUCIFERIUM</h1>
   </header>
-  <nav>
-    <a href="#univers">L'univers</a>
-    <a href="#connexion">Connexion</a>
-    <a href="#cadeaux">Cadeaux</a>
-    <a href="#forum">Forum</a>
-  </nav>
 
-  <div class="hero">
-    <h2>Ouvrez les portes de l'ombre</h2>
-    <img src="https://via.placeholder.com/300x100?text=Luciferium+Logo" alt="Logo Luciferium" class="logo-img" />
-    <button id="btnHeroConnect" class="btn" onclick="document.getElementById('connexion').scrollIntoView({behavior:'smooth'});">Connexion / Inscription</button>
-  </div>
+  <form id="loginForm" autocomplete="off">
+    <label for="email">Email :</label>
+    <input type="email" id="email" required />
 
-  <section id="univers" class="section">
-    <h3>Bienvenue dans l'univers de Luciferium</h3>
-    <p>Luciferium est une application unique mêlant mythe, spiritualité et interaction avec les forces de l'ombre. Une expérience sensorielle complète, appuyée par un forum, des cadeaux mystiques et une ambiance sonore ténébreuse.</p>
+    <label for="password">Mot de passe :</label>
+    <input type="password" id="password" required />
+
+    <button type="submit">Se connecter / S'inscrire</button>
+  </form>
+
+  <section id="forumLocked">
+    <p>Vous devez être connecté pour accéder au forum.</p>
   </section>
 
-  <section id="connexion" class="section">
-    <h3>Connexion / Inscription</h3>
-    <form id="loginForm" action="#" method="post" autocomplete="off">
-      <label>Email :
-        <input type="email" id="email" required autocomplete="username" />
-      </label>
-      <label>Mot de passe :
-        <div class="password-container">
-          <input type="password" id="password" required autocomplete="current-password" />
-          <button type="button" class="toggle-password" onclick="togglePassword()">👁</button>
-        </div>
-      </label>
-      <button type="submit" id="loginBtn">Se connecter / S'inscrire</button>
+  <section id="forumArea" class="hidden">
+    <h2>Forum Luciferium</h2>
+    <div id="messagesList">Aucun message pour le moment. Soyez le premier à écrire !</div>
+    <form id="messageForm">
+      <label for="messageInput">Votre message :</label>
+      <textarea id="messageInput" rows="3" required style="width: 100%; background: #222; color: #f2f2f2; border: 1px solid #444; border-radius: 4px; padding: 0.5rem;"></textarea>
+      <button type="submit" style="margin-top: 0.5rem;">Envoyer</button>
     </form>
+    <button id="logoutBtn" style="margin-top: 1rem; background: #444; width: 100%;">Déconnexion</button>
   </section>
 
-  <section id="cadeaux" class="section">
-    <h3>Cadeaux & Codes Mystiques</h3>
-    <p>Des codes seront distribués à nos fidèles pour débloquer des secrets cachés dans l'application. Activez-les dans votre compte pour bénéficier de bonus exclusifs.</p>
-  </section>
-
-  <section id="newsletter" class="section">
-    <h3>Newsletter</h3>
-    <p>Abonnez-vous pour recevoir les dernières nouvelles et offres mystiques.</p>
-    <form id="newsletterForm" action="#" method="post" autocomplete="off">
-      <label>Email : <input type="email" id="newsletterEmail" required autocomplete="email" /></label>
-      <button type="submit">S'abonner</button>
-    </form>
-    <p id="newsletterMessage" style="color: #ff2e2e; margin-top: 1rem;"></p>
-  </section>
-
-  <section id="forum" class="section">
-    <h3>Forum</h3>
-
-    <div id="forumArea" class="hidden">
-      <div
-        id="messagesList"
-        style="max-height:300px; overflow-y:auto; border:1px solid #444; padding:10px; background:#111; margin-bottom:1rem;"
-      ></div>
-
-      <form id="messageForm">
-        <label for="messageInput">Votre message :</label>
-        <textarea
-          id="messageInput"
-          rows="3"
-          required
-          style="width:100%; background:#222; color:#f2f2f2; border:1px solid #444; border-radius:4px; padding:0.5rem;"
-        ></textarea>
-        <button
-          type="submit"
-          style="margin-top:0.5rem; background:#ff2e2e; color:#fff; border:none; padding:0.5rem 1rem; border-radius:4px; cursor:pointer;"
-        >
-          Envoyer
-        </button>
-      </form>
-    </div>
-
-    <div id="forumLocked">
-      <p>Vous devez être connecté pour accéder au forum.</p>
-    </div>
-  </section>
-
-  <div class="footer">© 2025 Luciferium - Tous droits réservés.</div>
-
-  <!-- Son porte qui grince -->
   <audio id="doorSound" src="https://actions.google.com/sounds/v1/doors/door_creak_open.ogg" preload="auto"></audio>
 
   <script>
-    function togglePassword() {
-      const pwd = document.getElementById('password');
-      pwd.type = pwd.type === 'password' ? 'text' : 'password';
-    }
-
-    // Joue le son au clic sur le bouton (indépendant du formulaire)
-    const doorSound = document.getElementById('doorSound');
-    const loginBtn = document.getElementById('loginBtn');
-    loginBtn.addEventListener('click', () => {
-      doorSound.currentTime = 0;
-      doorSound.play().catch(() => {
-        // Peut échouer si clic non autorisé par navigateur, silencieux ok
-      });
-    });
-
-    // Gestion de connexion/inscription simulée avec stockage localStorage
     const loginForm = document.getElementById('loginForm');
-    loginForm.addEventListener('submit', function (e) {
-      e.preventDefault();
+    const forumArea = document.getElementById('forumArea');
+    const forumLocked = document.getElementById('forumLocked');
+    const doorSound = document.getElementById('doorSound');
+    const logoutBtn = document.getElementById('logoutBtn');
 
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value.trim();
-
-      if (!email || !password) {
-        alert('Veuillez remplir tous les champs.');
-        return;
-      }
-
-      // Stockage user connecté
-      const userData = {
-        email: email,
-        loggedIn: true,
-      };
-      localStorage.setItem('luciferiumUser', JSON.stringify(userData));
-
-      alert('Connexion réussie ! Bienvenue ' + email.split('@')[0]);
-
-      updateUI();
-    });
-
-    // Met à jour l'interface selon connexion
-    function updateUI() {
-      const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
-
-      const connexionSection = document.getElementById('connexion');
-      if (userData && userData.loggedIn) {
-        connexionSection.classList.add('hidden');
-      } else {
-        connexionSection.classList.remove('hidden');
-      }
-
-      updateForumVisibility();
-    }
+    const messagesList = document.getElementById('messagesList');
+    const messageForm = document.getElementById('messageForm');
+    const messageInput = document.getElementById('messageInput');
 
     // Affiche ou cache le forum selon connexion
-    function updateForumVisibility() {
+    function updateUI() {
       const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
-      const forumArea = document.getElementById('forumArea');
-      const forumLocked = document.getElementById('forumLocked');
-
       if (userData && userData.loggedIn) {
-        forumArea.classList.remove('hidden');
-        forumLocked.classList.add('hidden');
+        loginForm.style.display = 'none';
+        forumLocked.style.display = 'none';
+        forumArea.style.display = 'block';
+        displayMessages();
       } else {
-        forumArea.classList.add('hidden');
-        forumLocked.classList.remove('hidden');
+        loginForm.style.display = 'block';
+        forumArea.style.display = 'none';
+        forumLocked.style.display = 'block';
       }
     }
 
-    // Forum : afficher messages
-    function displayMessages() {
-      const messagesList = document.getElementById('messagesList');
-      let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
-
-      if (messages.length === 0) {
-        messagesList.innerHTML = '<p>Aucun message pour le moment. Soyez le premier à écrire !</p>';
-        return;
-      }
-
-      messages.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-      messagesList.innerHTML = '';
-      messages.forEach((msg) => {
-        const msgDiv = document.createElement('div');
-        msgDiv.style.borderBottom = '1px solid #333';
-        msgDiv.style.padding = '0.3rem 0';
-
-        const date = new Date(msg.date);
-        const dateStr = date.toLocaleString();
-
-        msgDiv.innerHTML = `<strong>${msg.pseudo}</strong> <em style="font-size:0.8rem; color:#888;">(${dateStr})</em><br>${escapeHtml(msg.text)}`;
-
-        messagesList.appendChild(msgDiv);
-      });
-
-      messagesList.scrollTop = messagesList.scrollHeight;
-    }
-
-    // Échapper HTML dans message
+    // Echapper le texte pour éviter injection HTML
     function escapeHtml(text) {
       const div = document.createElement('div');
       div.textContent = text;
       return div.innerHTML;
     }
 
-    // Envoi message forum
-    const messageForm = document.getElementById('messageForm');
-    messageForm.addEventListener('submit', function (e) {
-      e.preventDefault();
+    // Afficher les messages du forum
+    function displayMessages() {
+      let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
+      if (messages.length === 0) {
+        messagesList.innerHTML = 'Aucun message pour le moment. Soyez le premier à écrire !';
+        return;
+      }
+      messages.sort((a, b) => new Date(a.date) - new Date(b.date));
+      messagesList.innerHTML = '';
+      messages.forEach(msg => {
+        const msgDiv = document.createElement('div');
+        msgDiv.style.borderBottom = '1px solid #333';
+        msgDiv.style.padding = '0.3rem 0';
+        const date = new Date(msg.date);
+        const dateStr = date.toLocaleString();
+        msgDiv.innerHTML = `<strong>${escapeHtml(msg.pseudo)}</strong> <em style="font-size:0.8rem; color:#888;">(${dateStr})</em><br>${escapeHtml(msg.text)}`;
+        messagesList.appendChild(msgDiv);
+      });
+      messagesList.scrollTop = messagesList.scrollHeight;
+    }
 
-      const messageInput = document.getElementById('messageInput');
+    // Envoi message formulaire forum
+    messageForm.addEventListener('submit', function(e) {
+      e.preventDefault();
       const text = messageInput.value.trim();
-      if (text.length === 0) return;
+      if (!text) return;
 
       const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
       if (!userData || !userData.loggedIn) {
@@ -341,7 +199,7 @@
       const newMsg = {
         pseudo,
         text,
-        date: new Date().toISOString(),
+        date: new Date().toISOString()
       };
 
       let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
@@ -352,26 +210,40 @@
       displayMessages();
     });
 
-    // Newsletter simple (simulate subscription)
-    const newsletterForm = document.getElementById('newsletterForm');
-    const newsletterMessage = document.getElementById('newsletterMessage');
-
-    newsletterForm.addEventListener('submit', function (e) {
+    // Gestion connexion formulaire
+    loginForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      const email = document.getElementById('newsletterEmail').value.trim();
-      if (!email) {
-        newsletterMessage.textContent = 'Veuillez entrer une adresse email valide.';
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (!email || !password) {
+        alert('Merci de remplir tous les champs.');
         return;
       }
-      newsletterMessage.style.color = '#ff2e2e';
-      newsletterMessage.textContent = 'Merci pour votre abonnement !';
-      newsletterForm.reset();
+
+      // Jouer le son porte qui grince
+      doorSound.currentTime = 0;
+      doorSound.play().catch(err => {
+        console.log('Erreur lecture son:', err);
+      });
+
+      const userData = { email, loggedIn: true };
+      localStorage.setItem('luciferiumUser', JSON.stringify(userData));
+      alert(`Bienvenue ${email.split('@')[0]} !`);
+
+      updateUI();
     });
 
-    // Initialisation
+    // Déconnexion
+    logoutBtn.addEventListener('click', function() {
+      localStorage.removeItem('luciferiumUser');
+      alert('Vous êtes déconnecté.');
+      updateUI();
+    });
+
+    // Initialisation UI
     updateUI();
-    displayMessages();
   </script>
+
 </body>
 </html>
-

@@ -7,7 +7,7 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #0b0b0b;
       color: #f2f2f2;
     }
@@ -21,6 +21,7 @@
       font-size: 2.5rem;
       color: #ff2e2e;
       letter-spacing: 3px;
+      margin: 0;
     }
     nav {
       display: flex;
@@ -47,6 +48,7 @@
       font-size: 2.2rem;
       color: #fff;
       text-shadow: 1px 1px 8px #000;
+      margin: 0 0 1rem 0;
     }
     .section {
       padding: 3rem 2rem;
@@ -64,6 +66,7 @@
       padding: 2rem;
       font-size: 0.9rem;
       color: #666;
+      margin-top: 3rem;
     }
     .btn {
       display: inline-block;
@@ -73,6 +76,7 @@
       text-decoration: none;
       border-radius: 5px;
       margin-top: 1rem;
+      cursor: pointer;
     }
     form label {
       display: block;
@@ -85,9 +89,9 @@
       border-radius: 4px;
       color: #f2f2f2;
       width: 100%;
-      box-sizing: border-box;
+      font-size: 1rem;
     }
-    button {
+    button, .btn {
       background: #ff2e2e;
       border: none;
       padding: 0.6rem 1rem;
@@ -95,8 +99,9 @@
       font-weight: bold;
       cursor: pointer;
       border-radius: 4px;
+      font-size: 1rem;
     }
-    button:hover {
+    button:hover, .btn:hover {
       background: #d92626;
     }
     .password-container {
@@ -111,121 +116,7 @@
       border: none;
       color: #f2f2f2;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
     .logo-img {
-      display: block;
-      margin: 1rem auto 2rem;
-      max-width: 300px;
-    }
-    #forumLocked {
-      background: #1a1a1a;
-      border: 1px solid #444;
-      padding: 1rem;
-      text-align: center;
-      color: #aaa;
-      font-style: italic;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>LUCIFERIUM</h1>
-  </header>
 
-  <nav>
-    <a href="#univers">L'univers</a>
-    <a href="#connexion">Connexion</a>
-    <a href="#cadeaux">Cadeaux</a>
-    <a href="#forum">Forum</a>
-  </nav>
-
-  <div class="hero">
-    <h2>Ouvrez les portes de l'ombre</h2>
-    <img src="https://via.placeholder.com/300x100?text=Luciferium+Logo" alt="Logo Luciferium" class="logo-img" />
-    <!-- bouton "Connexion / Inscription" retiré ici -->
-  </div>
-
-  <section id="univers" class="section">
-    <h3>Bienvenue dans l'univers de Luciferium</h3>
-    <p>Luciferium est une application unique mêlant mythe, spiritualité et interaction avec les forces de l'ombre. Une expérience sensorielle complète, appuyée par un forum, des cadeaux mystiques et une ambiance sonore ténébreuse.</p>
-  </section>
-
-  <section id="connexion" class="section">
-    <h3>Connexion / Inscription</h3>
-    <form id="loginForm">
-      <label>Email : <input type="email" required /></label>
-      <label>Mot de passe :
-        <div class="password-container">
-          <input type="password" id="password" required />
-          <button type="button" class="toggle-password" onclick="togglePassword()">👁</button>
-        </div>
-      </label>
-      <button type="submit">Se connecter / S'inscrire</button>
-    </form>
-  </section>
-
-  <section id="cadeaux" class="section">
-    <h3>Cadeaux & Codes Mystiques</h3>
-    <p>Des codes seront distribués à nos fidèles pour débloquer des secrets cachés dans l'application. Activez-les dans votre compte pour bénéficier de bonus exclusifs.</p>
-  </section>
-
-  <section id="forum" class="section">
-    <h3>Forum</h3>
-
-    <div id="forumArea" style="display:none;">
-      <div
-        id="messagesList"
-        style="max-height:300px; overflow-y:auto; border:1px solid #444; padding:10px; background:#111; margin-bottom:1rem;"
-      ></div>
-
-      <form id="messageForm">
-        <label for="messageInput">Votre message :</label>
-        <textarea
-          id="messageInput"
-          rows="3"
-          required
-          style="width:100%; background:#222; color:#f2f2f2; border:1px solid #444; border-radius:4px; padding:0.5rem;"
-        ></textarea>
-        <button
-          type="submit"
-          style="margin-top:0.5rem; background:#ff2e2e; color:#fff; border:none; padding:0.5rem 1rem; border-radius:4px; cursor:pointer;"
-        >
-          Envoyer
-        </button>
-      </form>
-    </div>
-
-    <div id="forumLocked" >
-      <p>Vous devez être connecté pour accéder au forum.</p>
-    </div>
-  </section>
-
-  <div class="footer">
-    © 2025 Luciferium - Tous droits réservés.
-  </div>
-
-  <script>
-    // Fonction pour afficher/masquer le mot de passe
-    function togglePassword() {
-      const pwd = document.getElementById('password');
-      pwd.type = pwd.type === 'password' ? 'text' : 'password';
-    }
-
-    // Gestion du formulaire de connexion/inscription sans requête serveur
-    document.getElementById('loginForm').addEventListener('submit', function (e) {
-      e.preventDefault(); // Empêche le rechargement
-
-      const email = this.querySelector('input[type="email"]').value.trim();
-      const password = this.querySelector('#password').value.trim();
-
-      if (!email || !password) {
-        alert('Veuillez entrer votre email et mot de passe.');
-        return;
-      }
-
-      // Stockage basique en localStorage (prototype uniquement)
-      const userData = { email, loggedIn: true };
-      localStorage.setItem('luciferiumUser', JSON.stringify(userData));
-
-      alert('Conn

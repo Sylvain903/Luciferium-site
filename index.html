@@ -182,8 +182,21 @@
   </section>
 
   <section id="forum" class="section">
-    <h3>Forum</h3>
-    <div id="forumContent">
+   <h3>Forum</h3>
+
+<div id="forumArea">
+  <div id="messagesList" style="max-height:300px; overflow-y:auto; border:1px solid #444; padding:10px; background:#111; margin-bottom:1rem;"></div>
+
+  <form id="messageForm">
+    <label for="messageInput">Votre message :</label>
+    <textarea id="messageInput" rows="3" required style="width:100%; background:#222; color:#f2f2f2; border:1px solid #444; border-radius:4px; padding:0.5rem;"></textarea>
+    <button type="submit" style="margin-top:0.5rem; background:#ff2e2e; color:#fff; border:none; padding:0.5rem 1rem; border-radius:4px; cursor:pointer;">Envoyer</button>
+  </form>
+</div>
+
+<div id="forumLocked" class="hidden">
+  <p>Vous devez être connecté pour accéder au forum.</p>
+</div>
       <p>Un lieu pour discuter entre initiés, partager vos expériences avec l'app ou explorer les mystères de Luciferium. (Forum actif après inscription.)</p>
     </div>
     <div id="forumLocked" class="hidden">

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Luciferium</title>
+  <title>Accueil - Nebula Création</title>
   <style>
     html, body {
       margin: 0;
@@ -11,39 +11,41 @@
       width: 100%;
       overflow: hidden;
     }
-    /* Fond plein écran */
     img.bg {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;   
-      height: 100%;  
+      width: 100%;
+      height: 100%;
       object-fit: fill;
       z-index: -1;
     }
-    /* Bouton image */
     .btn-luciferium {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 25%;     /* bouton prend 1/4 de la largeur */
+      top: 5px;        /* collé en haut */
+      right: 20px;     /* bord droit */
+      width: 20%;      /* plus petit */
+      padding: 5px 0;  /* plus fin */
+      text-align: center;
+      background: rgba(0,0,0,0.5);
+      color: #ff3b3b;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border-radius: 6px;
       cursor: pointer;
-      z-index: 1;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .btn-luciferium:hover {
+      background: rgba(80,0,0,0.7);
     }
   </style>
 </head>
 <body>
   <!-- Fond accueil -->
-  <img id="fond" src="acceuil_site.png" class="bg" alt="Accueil">
+  <img src="acceuil_site.png" class="bg" alt="Fond accueil">
 
-  <!-- Ton bouton personnalisé -->
-  <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium"
-       onclick="switchToLuciferium()">
-
-  <script>
-    function switchToLuciferium() {
-      document.getElementById("fond").src = "site_luciferium.png";
-    }
-  </script>
+  <!-- Bouton vers Luciferium -->
+  <a href="site_luciferium.html" class="btn-luciferium">LUCIFERIUM</a>
 </body>
 </html>

@@ -8,11 +8,13 @@
     html, body {
       margin: 0;
       height: 100%;
+      width: 100%;
       overflow: hidden;
     }
     img.bg {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: fill;
@@ -21,6 +23,7 @@
   </style>
 </head>
 <body>
-  <img src="site_luciferium.png" class="bg" alt="Fond Luciferium">
+  <!-- Fond Luciferium -->
+  <img src="site_luciferium.png" class="bg" alt="Luciferium">
 </body>
 </html>

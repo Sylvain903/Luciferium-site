@@ -15,17 +15,29 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;   /* force largeur */
-      height: 100%;  /* force hauteur */
-      object-fit: fill; /* étire l'image */
+      width: 100%;   
+      height: 100%;  
+      object-fit: fill; 
       z-index: -1;
     }
     .btn-luciferium {
       position: absolute;
-      top: 20px;      /* distance du haut */
-      left: 20px;     /* distance de la gauche */
-      width: 180px;   /* largeur du bouton */
+      top: 20px;          /* distance du haut */
+      right: 20px;        /* distance du bord droit */
+      width: 25%;         /* un quart de l'écran */
+      padding: 10px 0;    /* pas trop haut */
+      text-align: center;
+      background: rgba(0,0,0,0.5); /* léger fond transparent */
+      color: #ff3b3b;
+      font-size: 1.5rem;
+      font-weight: bold;
+      border-radius: 8px;
       cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .btn-luciferium:hover {
+      background: rgba(80,0,0,0.7);
     }
   </style>
 </head>
@@ -33,9 +45,7 @@
   <!-- Fond -->
   <img src="site_luciferium.png" class="bg" alt="Fond Luciferium">
 
-  <!-- Bouton -->
-  <a href="#luciferium">
-    <img src="bouton_acces.png" alt="Accès Luciferium" class="btn-luciferium">
-  </a>
+  <!-- Bouton mot Luciferium -->
+  <a href="#luciferium" class="btn-luciferium">LUCIFERIUM</a>
 </body>
 </html>

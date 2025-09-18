@@ -9,8 +9,9 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: url('site_luciferium.png') no-repeat center center fixed;
-      background-size: cover;
+      background: url('site_luciferium.png') no-repeat center top fixed;
+      background-size: contain;
+      background-color: black;
       color: #f2f2f2;
       min-height: 100vh;
       display: flex;
@@ -58,9 +59,6 @@
     }
     .logout-button:hover, #loginBtn:hover {
       background: #cc2a2a;
-    }
-    #loginBtn {
-      right: 2rem;
     }
 
     nav {
@@ -292,7 +290,6 @@
         id="messageInput"
         rows="3"
         required
-        style="width: 100%; background: #220000; color: #f2f2f2; border: 1px solid #550000; border-radius: 4px; padding: 0.5rem;"
       ></textarea>
       <button type="submit" style="margin-top: 0.5rem;">Envoyer</button>
     </form>
@@ -307,33 +304,24 @@
   <audio id="screamSound" src="https://actions.google.com/sounds/v1/human_voices/male_scream.ogg" preload="auto"></audio>
 
   <script>
-    // Afficher / cacher section connexion
     function showConnexion() {
       document.getElementById('connexion').classList.remove('hidden');
       window.location.hash = '#connexion';
     }
-
-    // Toggle mot de passe visible
     function togglePassword() {
       const pwd = document.getElementById('password');
       pwd.type = pwd.type === 'password' ? 'text' : 'password';
     }
-
-    // Jouer son porte qui grince à la connexion
     function playDoorSound() {
       const doorSound = document.getElementById('doorSound');
       doorSound.currentTime = 0;
       doorSound.play();
     }
-
-    // Jouer son cri à la déconnexion
     function playScreamSound() {
       const screamSound = document.getElementById('screamSound');
       screamSound.currentTime = 0;
       screamSound.play();
     }
-
-    // Mise à jour interface utilisateur (affichage des boutons)
     function updateUI() {
       const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
       const loginBtn = document.getElementById('loginBtn');
@@ -352,16 +340,12 @@
         forumSection.classList.add('hidden');
       }
     }
-
-    // Fonction logout
     function logout() {
       playScreamSound();
       localStorage.removeItem('luciferiumUser');
       updateUI();
       alert('Vous êtes déconnecté.');
     }
-
-    // Gestion connexion / inscription
     document.getElementById('loginForm').addEventListener('submit', function (e) {
       e.preventDefault();
       const email = document.getElementById('email').value.trim();
@@ -375,80 +359,51 @@
       updateUI();
       alert('Connexion réussie !');
     });
-
-    // Gestion messages forum
     function displayMessages() {
       const messagesList = document.getElementById('forumArea');
       let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
-
       if (messages.length === 0) {
         messagesList.innerHTML = '<p>Aucun message pour le moment. Soyez le premier à écrire !</p>';
         return;
       }
-
       messages.sort((a, b) => new Date(a.date) - new Date(b.date));
       messagesList.innerHTML = '';
-
       messages.forEach((msg) => {
         const msgDiv = document.createElement('div');
-        msgDiv.style.borderBottom = '1px solid #550000';
-        msgDiv.style.padding = '0.3rem 0';
-
         const date = new Date(msg.date);
         const dateStr = date.toLocaleString();
-
-        msgDiv.innerHTML = `<strong>${msg.pseudo}</strong> <em style="font-size:0.8rem; color:#aa6666;">(${dateStr})</em><br>${escapeHtml(
-          msg.text
-        )}`;
+        msgDiv.innerHTML = `<strong>${msg.pseudo}</strong> <em style="font-size:0.8rem; color:#aa6666;">(${dateStr})</em><br>${escapeHtml(msg.text)}`;
         messagesList.appendChild(msgDiv);
       });
-
       messagesList.scrollTop = messagesList.scrollHeight;
     }
-
-    // Protection contre l'injection HTML dans les messages
     function escapeHtml(text) {
       const div = document.createElement('div');
       div.textContent = text;
       return div.innerHTML;
     }
-
-    // Envoi message forum
     document.getElementById('messageForm').addEventListener('submit', function (e) {
       e.preventDefault();
-
       const messageInput = document.getElementById('messageInput');
       const text = messageInput.value.trim();
       if (text.length === 0) return;
-
       const userData = JSON.parse(localStorage.getItem('luciferiumUser'));
       if (!userData || !userData.loggedIn) {
         alert('Vous devez être connecté pour poster un message.');
         return;
       }
-
       const pseudo = userData.email.split('@')[0] || 'Anonyme';
-      const newMsg = {
-        pseudo,
-        text,
-        date: new Date().toISOString(),
-      };
-
+      const newMsg = { pseudo, text, date: new Date().toISOString() };
       let messages = JSON.parse(localStorage.getItem('luciferiumMessages')) || [];
       messages.push(newMsg);
       localStorage.setItem('luciferiumMessages', JSON.stringify(messages));
-
       messageInput.value = '';
       displayMessages();
     });
-
-    // Initialisation interface au chargement
     window.addEventListener('load', () => {
       updateUI();
       displayMessages();
     });
-
-    // Clic bouton connexion (jouer son + afficher formulaire)
     document.getElementById('loginBtn').addEventListener('click', () => {
       playDoorSound();
       showConnexion();

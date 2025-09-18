@@ -21,35 +21,24 @@
       object-fit: fill;
       z-index: -1;
     }
-    /* Bouton */
+    /* Bouton image */
     .btn-luciferium {
       position: absolute;
       top: 20px;
       right: 20px;
-      width: 25%;
-      padding: 10px 0;
-      text-align: center;
-      background: rgba(0,0,0,0.5);
-      color: #ff3b3b;
-      font-size: 1.5rem;
-      font-weight: bold;
-      border-radius: 8px;
+      width: 25%;     /* bouton prend 1/4 de la largeur */
       cursor: pointer;
-      text-decoration: none;
-      transition: background 0.3s;
       z-index: 1;
-    }
-    .btn-luciferium:hover {
-      background: rgba(80,0,0,0.7);
     }
   </style>
 </head>
 <body>
-  <!-- Par défaut on affiche l’accueil -->
+  <!-- Fond accueil -->
   <img id="fond" src="acceuil_site.png" class="bg" alt="Accueil">
 
-  <!-- Bouton pour basculer -->
-  <a href="#" class="btn-luciferium" onclick="switchToLuciferium()">LUCIFERIUM</a>
+  <!-- Ton bouton personnalisé -->
+  <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium"
+       onclick="switchToLuciferium()">
 
   <script>
     function switchToLuciferium() {

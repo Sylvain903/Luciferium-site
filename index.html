@@ -10,12 +10,21 @@
       padding: 0;
       height: 100%;
       width: 100%;
-      background: url('site_luciferium.png') no-repeat center center fixed;
-      background-size: contain; /* l'image entière est affichée */
-      background-color: black;  /* remplissage autour si besoin */
+      background-color: black; /* autour si formats différents */
+    }
+    .background-img {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* montre toute l’image sans zoom */
+      object-position: center;
+      z-index: -1; /* derrière tout */
     }
   </style>
 </head>
 <body>
+  <img src="site_luciferium.png" alt="Fond Luciferium" class="background-img">
 </body>
 </html>

@@ -3,49 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Accueil - Nebula Création</title>
+  <title>Accueil — Nebula Création</title>
   <style>
-    html, body {
-      margin: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-    }
+    html, body { margin:0; height:100%; overflow:hidden; }
     img.bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: fill;
-      z-index: -1;
+      position:fixed; inset:0; width:100%; height:100%;
+      object-fit:fill; /* tu avais aimé l’effet étiré */
+      z-index:-1;
     }
-    .btn-luciferium {
-      position: absolute;
-      top: 5px;        /* collé en haut */
-      right: 20px;     /* bord droit */
-      width: 20%;      /* plus petit */
-      padding: 5px 0;  /* plus fin */
-      text-align: center;
-      background: rgba(0,0,0,0.5);
-      color: #ff3b3b;
-      font-size: 1.2rem;
-      font-weight: bold;
-      border-radius: 6px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.3s;
+    .btn-wrap {
+      position:fixed; top:16px; right:16px; z-index:10;
     }
-    .btn-luciferium:hover {
-      background: rgba(80,0,0,0.7);
+    .btn-wrap a { display:inline-block; line-height:0; }
+    .btn-img {
+      width: clamp(140px, 18vw, 320px);  /* fin et responsive */
+      height: auto; display:block;
     }
   </style>
 </head>
 <body>
-  <!-- Fond accueil -->
+  <!-- fond accueil -->
   <img src="acceuil_site.png" class="bg" alt="Fond accueil">
 
-  <!-- Bouton vers Luciferium -->
-  <a href="site_luciferium.html" class="btn-luciferium">LUCIFERIUM</a>
+  <!-- TON bouton image (accent encodé) -->
+  <div class="btn-wrap">
+    <a href="site_luciferium.html" title="Accéder à Luciferium">
+      <img src="bouton_acc%C3%A9s.png" class="btn-img" alt="Bouton accès Luciferium">
+    </a>
+  </div>
 </body>
 </html>

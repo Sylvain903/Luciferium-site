@@ -3,44 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Accueil — Nebula Création</title>
+  <title>Accueil - Luciferium</title>
   <style>
     html, body {
       margin: 0;
       height: 100%;
+      width: 100%;
       overflow: hidden;
     }
     img.bg {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      object-fit: fill; /* tu avais aimé l'effet étiré */
+      object-fit: fill;
       z-index: -1;
     }
-    .btn-wrap {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      z-index: 10;
-    }
-    .btn-wrap a { display: inline-block; line-height: 0; }
-    .btn-img {
-      width: clamp(140px, 18vw, 280px); /* bouton plus fin et responsive */
-      height: auto;
-      display: block;
+    .btn-luciferium {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 25%;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
   <!-- Fond accueil -->
-  <img src="acceuil_site.png" class="bg" alt="Fond accueil">
+  <img src="acceuil_site.png" class="bg" alt="Accueil Luciferium">
 
-  <!-- Ton bouton image -->
-  <div class="btn-wrap">
-    <a href="site_luciferium.html" title="Accéder à Luciferium">
-      <img src="bouton_acces.png" class="btn-img" alt="Bouton accès Luciferium">
-    </a>
-  </div>
+  <!-- Bouton image -->
+  <a href="site_luciferium.html">
+    <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
+  </a>
 </body>
 </html>

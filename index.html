@@ -3,26 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Luciferium</title>
+  <title>Site officiel - Nebula Création</title>
   <style>
-    html, body {
+    /* Style global */
+    body {
       margin: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('site_luciferium.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #f2f2f2;
+      min-height: 100vh;
     }
-    img.bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;   /* force largeur */
-      height: 100%;  /* force hauteur */
-      object-fit: fill; /* étire sans pitié */
-      z-index: -1;
+
+    /* Bouton logo Luciferium */
+    .logo-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+    .logo-btn img {
+      width: 220px; /* ajuste la taille du bouton */
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .logo-btn img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Section Luciferium */
+    #luciferium {
+      background: rgba(0,0,0,0.6);
+      margin: 150px auto;
+      padding: 2rem;
+      max-width: 800px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    #luciferium h2 {
+      color: #ff3b3b;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 6px #900;
+    }
+    #luciferium p {
+      font-size: 1.2rem;
+      line-height: 1.6;
     }
   </style>
 </head>
 <body>
-  <img src="site_luciferium.png" class="bg" alt="Fond Luciferium">
+  <!-- Bouton Luciferium -->
+  <div class="logo-btn">
+    <a href="#luciferium">
+      <img src="bouton_acces.png" alt="Accès Luciferium" />
+    </a>
+  </div>
+
+  <!-- Section Luciferium -->
+  <section id="luciferium">
+    <h2>Luciferium</h2>
+    <p>
+      Bienvenue dans l’univers de Luciferium.<br>
+      Ici sera présentée ton application : teaser, captures, explications,
+      et toutes les actualités officielles.
+    </p>
+  </section>
 </body>
 </html>

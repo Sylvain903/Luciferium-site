@@ -17,12 +17,25 @@
       left: 0;
       width: 100%;   /* force largeur */
       height: 100%;  /* force hauteur */
-      object-fit: fill; /* étire sans pitié */
+      object-fit: fill; /* étire l'image */
       z-index: -1;
+    }
+    .btn-luciferium {
+      position: absolute;
+      top: 20px;      /* distance du haut */
+      left: 20px;     /* distance de la gauche */
+      width: 180px;   /* largeur du bouton */
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
+  <!-- Fond -->
   <img src="site_luciferium.png" class="bg" alt="Fond Luciferium">
+
+  <!-- Bouton -->
+  <a href="#luciferium">
+    <img src="bouton_acces.png" alt="Accès Luciferium" class="btn-luciferium">
+  </a>
 </body>
 </html>

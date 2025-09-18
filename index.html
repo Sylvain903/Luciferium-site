@@ -5,14 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Luciferium</title>
   <style>
-    body {
+    html, body {
       margin: 0;
-      height: 100vh;
-      background: url('site_luciferium.png') no-repeat center center;
-      background-size: 100% 100%; /* étiré largeur + hauteur */
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    img.bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;   /* force largeur */
+      height: 100%;  /* force hauteur */
+      object-fit: fill; /* étire sans pitié */
+      z-index: -1;
     }
   </style>
 </head>
 <body>
+  <img src="site_luciferium.png" class="bg" alt="Fond Luciferium">
 </body>
 </html>

@@ -52,16 +52,11 @@
       width: 320px;
       height: 180px;
       background: black; /* fond noir par défaut */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: gray;
-      font-size: 12px;
     }
-    video {
+    .video-container iframe {
       width: 100%;
       height: 100%;
-      background: black;
+      border: none;
     }
 
     /* Zone news */
@@ -123,12 +118,14 @@
     <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
   </div>
 
-  <!-- Lecteur vidéo -->
+  <!-- Lecteur vidéo YouTube -->
   <div class="video-container">
-    <video id="lucifer-video" controls poster="acceuil_site.png">
-      <source src="untitled.mp4" type="video/mp4">
-      Votre navigateur ne supporte pas la vidéo.
-    </video>
+    <iframe 
+      src="https://www.youtube.com/embed/k95JXMWTqIE"
+      title="Teaser Luciferium"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
   </div>
 
   <!-- Zone news -->
@@ -170,4 +167,3 @@
   </script>
 </body>
 </html>
-

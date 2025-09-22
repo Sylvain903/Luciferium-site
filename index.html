@@ -59,18 +59,17 @@
     iframe {
       width: 100%;
       height: 100%;
+      border: none;
     }
 
-    /* Zone news élargie */
+    /* Zone news */
     .news {
       position: absolute;
       top: 20px;
       left: 20px;
-      bottom: 20px;
       width: 300px;
       font-size: 14px;
       text-align: left;
-      overflow-y: auto;
     }
 
     /* Chat */
@@ -102,6 +101,18 @@
       font-size: 13px;
       cursor: pointer;
     }
+
+    /* Responsive pour mobile */
+    @media (max-width: 768px) {
+      .video-container, .news, .chat {
+        position: static;
+        width: 100%;
+        margin: 10px 0;
+      }
+      .chat-messages {
+        height: 120px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -113,14 +124,9 @@
     <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
   </div>
 
-  <!-- Lecteur vidéo YouTube -->
+  <!-- Lecteur vidéo -->
   <div class="video-container">
-    <iframe src="https://www.youtube.com/embed/k95JXMWTqIE"
-      title="Teaser Luciferium"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
+    <iframe src="https://www.youtube.com/embed/k95JXMWTqIE" allowfullscreen></iframe>
   </div>
 
   <!-- Zone news -->

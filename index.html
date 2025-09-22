@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Accueil - Luciferium</title>
   <style>
+    /* ====== VERSION PC (inchangée) ====== */
     html, body {
       margin: 0;
       padding: 0;
@@ -20,7 +21,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: cover;   /* fond adaptatif */
       z-index: -1;
       display: block;
     }
@@ -98,63 +99,70 @@
       cursor: pointer;
     }
 
-    /* --- VERSION MOBILE --- */
+    /* ====== VERSION MOBILE (seulement < 768px) ====== */
     @media (max-width: 768px) {
-      body {
-        overflow-y: auto; /* scroll vertical */
-      }
+      /* permettre le scroll et éviter que le chat fixe masque le contenu */
+      html, body { overflow-y: auto; }
+      body { padding-bottom: 130px; } /* espace réservé au chat fixe */
 
-      /* Bouton Luciferium tout en haut */
+      /* 1) Bouton Luciferium collé tout en haut, un peu plus fin */
       .btn-container {
         position: relative;
         top: 0;
         left: 0;
         transform: none;
-        margin: 0 auto;
         width: 100%;
+        margin: 8px 0 6px 0;
+        text-align: center;
       }
       .btn-luciferium {
-        max-width: 90%;
+        max-width: 80%;   /* plus fin => réduit la hauteur proportionnellement */
         height: auto;
         margin: 0 auto;
         display: block;
       }
 
-      /* Vidéo juste en dessous */
+      /* 2) Vidéo juste sous le bouton, plus petite et responsive */
       .video-container {
         position: relative;
         top: auto;
         right: auto;
         width: 90%;
-        height: 180px;
-        margin: 10px auto;
+        margin: 6px auto;
+        /* hauteur responsive 16:9 basée sur la largeur de l'écran */
+        height: calc(90vw * 9 / 16);
+        max-height: 220px;
       }
 
-      /* News après la vidéo */
+      /* 3) News sous la vidéo, sur la largeur */
       .news {
         position: relative;
         top: auto;
         left: auto;
-        width: 90%;
-        margin: 10px auto;
+        width: 94%;
+        margin: 8px auto;
         text-align: center;
       }
       .news p {
-        display: inline-block;
-        margin: 0 10px;
+        display: inline-block;   /* en ligne */
+        margin: 0 8px;
       }
 
-      /* Chat collé tout en bas */
+      /* 4) Chat collé tout en bas, réduit de moitié en hauteur */
       .chat {
-        position: relative;
-        bottom: auto;
-        right: auto;
-        width: 90%;
-        margin: 10px auto 0 auto;
-        height: 100px; /* réduit */
+        position: fixed;   /* collé au bas de l'écran */
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        height: 100px;     /* ~ moitié de 150px */
+        padding: 8px;
+        background: rgba(0,0,0,0.35);
       }
       .chat-messages {
-        height: 60px;
+        height: 60px;      /* réduit en conséquence */
       }
     }
   </style>
@@ -163,14 +171,17 @@
   <!-- Fond accueil -->
   <img src="acceuil_site.png" class="bg" alt="Accueil Luciferium">
 
-  <!-- Bouton centré géant -->
+  <!-- Bouton centré géant (PC). En mobile, il passe tout en haut via @media -->
   <div class="btn-container">
     <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
   </div>
 
   <!-- Lecteur YouTube -->
   <div class="video-container">
-    <iframe src="https://www.youtube.com/embed/k95JXMWTqIE" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/k95JXMWTqIE"
+            title="Teaser Luciferium"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
   </div>
 
   <!-- Zone news -->

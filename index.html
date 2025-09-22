@@ -44,6 +44,13 @@
       filter: brightness(1.2);
     }
 
+    /* Conteneur principal pour mobile */
+    .content {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
     /* Vidéo */
     .video-container {
       position: absolute;
@@ -104,14 +111,16 @@
 
     /* Responsive pour mobile */
     @media (max-width: 768px) {
-      .video-container, .news, .chat {
+      .video-container,
+      .news,
+      .chat {
         position: static;
         width: 100%;
         margin: 10px 0;
       }
-      .chat-messages {
-        height: 120px;
-      }
+      .video-container { order: 1; height: 200px; }
+      .chat { order: 2; }
+      .news { order: 3; }
     }
   </style>
 </head>
@@ -124,24 +133,27 @@
     <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
   </div>
 
-  <!-- Lecteur vidéo -->
-  <div class="video-container">
-    <iframe src="https://www.youtube.com/embed/k95JXMWTqIE" allowfullscreen></iframe>
-  </div>
+  <!-- Contenu ordonné -->
+  <div class="content">
+    <!-- Lecteur vidéo -->
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/k95JXMWTqIE" allowfullscreen></iframe>
+    </div>
 
-  <!-- Zone news -->
-  <div class="news">
-    <h3>📰 News</h3>
-    <p>- Luciferium est en ligne !</p>
-    <p>- Bientôt des mises à jour exclusives.</p>
-  </div>
+    <!-- Chat -->
+    <div class="chat">
+      <div class="chat-messages" id="chat-messages"></div>
+      <div class="chat-input">
+        <input type="text" id="chat-input" placeholder="Écrire un message...">
+        <button onclick="sendMessage()">Envoyer</button>
+      </div>
+    </div>
 
-  <!-- Chat -->
-  <div class="chat">
-    <div class="chat-messages" id="chat-messages"></div>
-    <div class="chat-input">
-      <input type="text" id="chat-input" placeholder="Écrire un message...">
-      <button onclick="sendMessage()">Envoyer</button>
+    <!-- Zone news -->
+    <div class="news">
+      <h3>📰 News</h3>
+      <p>- Luciferium est en ligne !</p>
+      <p>- Bientôt des mises à jour exclusives.</p>
     </div>
   </div>
 

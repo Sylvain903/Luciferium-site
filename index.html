@@ -103,24 +103,27 @@
 
     /* VERSION MOBILE */
     @media (max-width: 768px) {
+      body {
+        overflow-y: auto;
+      }
       .btn-container {
-        position: fixed;
+        position: relative;
         top: 0;
         left: 0;
         transform: none;
-        width: 100%;
         margin: 0;
-        text-align: center;
-        z-index: 10;
+        padding: 0;
       }
       .btn-luciferium {
         max-width: 100%;
       }
       .video-container {
         position: relative;
-        top: 60px; /* espace sous le bouton */
+        top: 0;
+        right: 0;
         width: 100%;
         height: auto;
+        margin: 0;
       }
       .video-container iframe {
         width: 100%;
@@ -128,9 +131,10 @@
       }
       .news {
         position: relative;
-        top: 70px; /* juste sous la vidéo */
+        top: 0;
+        left: 0;
         width: 100%;
-        margin: 0;
+        margin: 10px 0;
         text-align: center;
       }
       .chat {
@@ -138,7 +142,7 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 100px; /* réduit en hauteur */
+        height: 100px; /* réduit la hauteur */
         margin: 0;
         border-radius: 0;
       }

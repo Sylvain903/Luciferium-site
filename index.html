@@ -18,7 +18,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: fill; /* ✅ force l’image entière à s’étirer pour remplir l’écran */
+      object-fit: fill; /* ✅ image entière, élargie sur toute la page */
       z-index: -1;
       display: block;
     }
@@ -31,9 +31,9 @@
       width: 100%;
     }
     .btn-luciferium {
-      width: 100%;        /* bouton énorme, plein écran horizontal */
-      max-width: none;    /* pas de limite */
-      height: auto;       /* proportions respectées */
+      width: 100%;        /* bouton énorme */
+      max-width: 1200px;  /* limite sur très grands écrans */
+      height: auto;       /* garde proportions */
       cursor: pointer;
       transition: transform 0.2s ease, filter 0.2s ease;
     }

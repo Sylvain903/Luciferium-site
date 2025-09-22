@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Luciferium - Page 2</title>
+  <title>Luciferium - Accueil</title>
   <style>
     html, body {
       margin: 0;
@@ -11,21 +11,165 @@
       height: 100%;
       width: 100%;
       overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: white;
     }
+
+    /* Fond plein écran */
     img.bg {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: fill; /* l’image remplit tout l’écran */
+      object-fit: fill;
       z-index: -1;
-      display: block;
+    }
+
+    /* Positionnement des blocs */
+    .news {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      text-align: left;
+    }
+
+    .video {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 400px;
+      height: auto;
+    }
+
+    .codes {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+    }
+
+    .chat {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 300px;
+      max-height: 200px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Style du lecteur vidéo */
+    video {
+      width: 100%;
+      border: 2px solid red;
+      border-radius: 8px;
+      background: black;
+    }
+
+    /* Zone news */
+    .news h2 {
+      margin: 0 0 10px 0;
+      font-size: 20px;
+      color: red;
+    }
+
+    /* Zone codes cadeaux */
+    .codes input, .codes button {
+      padding: 5px;
+      border: 1px solid red;
+      background: transparent;
+      color: white;
+    }
+
+    /* Zone chat */
+    .chat-messages {
+      flex: 1;
+      border: 1px solid red;
+      padding: 5px;
+      overflow-y: auto;
+      font-size: 14px;
+      margin-bottom: 5px;
+      background: rgba(0,0,0,0.3);
+    }
+
+    .chat input, .chat button {
+      padding: 5px;
+      border: 1px solid red;
+      background: transparent;
+      color: white;
     }
   </style>
 </head>
 <body>
-  <!-- Fond de la page 2 -->
-  <img src="social.png" class="bg" alt="Page 2 Luciferium">
+  <!-- Fond -->
+  <img src="social.png" class="bg" alt="Accueil Luciferium">
+
+  <!-- Zone news -->
+  <div class="news">
+    <h2>News Luciferium</h2>
+    <p>- Lancement du site...</p>
+    <p>- Lecteur vidéo en test...</p>
+    <p>- Chat éphémère actif...</p>
+  </div>
+
+  <!-- Lecteur vidéo -->
+  <div class="video">
+    <video id="luciferVideo" controls>
+      <source src="ma-video.mp4" type="video/mp4">
+      Votre navigateur ne supporte pas la vidéo.
+    </video>
+  </div>
+
+  <!-- Codes cadeaux -->
+  <div class="codes">
+    <h3>Code Cadeau</h3>
+    <input type="text" id="giftCode" placeholder="Entrez votre code">
+    <button onclick="checkCode()">Valider</button>
+    <p id="giftMessage"></p>
+  </div>
+
+  <!-- Chat -->
+  <div class="chat">
+    <div class="chat-messages" id="chatMessages"></div>
+    <input type="text" id="chatInput" placeholder="Votre message">
+    <button onclick="sendMessage()">Envoyer</button>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // --- Codes cadeaux ---
+    function checkCode() {
+      const input = document.getElementById("giftCode").value.trim();
+      const msg = document.getElementById("giftMessage");
+      if (input === "LUCIFER") {
+        msg.innerText = "✔ Code valide !";
+      } else {
+        msg.innerText = "❌ Code incorrect.";
+      }
+    }
+
+    // --- Chat éphémère ---
+    const messages = [];
+    function sendMessage() {
+      const input = document.getElementById("chatInput");
+      const msgBox = document.getElementById("chatMessages");
+      let text = input.value.trim();
+
+      if (text !== "") {
+        // Petit filtre d'insultes simple
+        const badWords = ["con", "merde", "pute", "enculé"];
+        badWords.forEach(word => {
+          const regex = new RegExp(word, "gi");
+          text = text.replace(regex, "***");
+        });
+
+        messages.push(text);
+        if (messages.length > 5) messages.shift(); // max 5 messages
+
+        msgBox.innerHTML = messages.map(m => `<div>${m}</div>`).join("");
+        input.value = "";
+      }
+    }
+  </script>
 </body>
 </html>

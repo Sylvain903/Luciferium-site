@@ -11,6 +11,8 @@
       height: 100%;
       width: 100%;
       overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: white;
     }
     img.bg {
       position: fixed;
@@ -18,7 +20,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: fill; /* l’image entière, élargie comme tu voulais */
+      object-fit: fill;
       z-index: -1;
       display: block;
     }
@@ -31,15 +33,78 @@
       width: 100%;
     }
     .btn-luciferium {
-      width: 100%;        /* bouton très large */
-      max-width: 1200px;  /* limite sur très grands écrans */
-      height: auto;       /* garde les proportions */
+      width: 100%;
+      max-width: 1200px;
+      height: auto;
       cursor: pointer;
       transition: transform 0.2s ease, filter 0.2s ease;
     }
     .btn-luciferium:hover {
       transform: scale(1.05);
       filter: brightness(1.2);
+    }
+
+    /* Vidéo */
+    .video-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 320px;
+      height: 180px;
+      background: rgba(0,0,0,0.5);
+    }
+    video {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Zone news */
+    .news {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 300px;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    /* Zone codes cadeaux */
+    .codes {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      width: 300px;
+      font-size: 14px;
+    }
+
+    /* Chat */
+    .chat {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 300px;
+      background: rgba(0,0,0,0.3);
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .chat-messages {
+      height: 150px;
+      overflow: hidden;
+      font-size: 13px;
+    }
+    .chat-input {
+      margin-top: 5px;
+      display: flex;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 5px;
+      font-size: 13px;
+    }
+    .chat-input button {
+      padding: 5px;
+      font-size: 13px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -49,9 +114,53 @@
 
   <!-- Bouton centré géant -->
   <div class="btn-container">
-    <a href="page2.html">
-      <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
-    </a>
+    <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
   </div>
+
+  <!-- Lecteur vidéo -->
+  <div class="video-container">
+    <video controls>
+      <source src="video.mp4" type="video/mp4">
+      Votre navigateur ne supporte pas la vidéo.
+    </video>
+  </div>
+
+  <!-- Zone news -->
+  <div class="news">
+    <h3>📰 News</h3>
+    <p>- Luciferium est en ligne !</p>
+    <p>- Bientôt des mises à jour exclusives.</p>
+  </div>
+
+  <!-- Zone codes cadeaux -->
+  <div class="codes">
+    <h3>🎁 Codes cadeaux</h3>
+    <p>CODE1-TEST-2025</p>
+    <p>CODE2-DEMO-666</p>
+  </div>
+
+  <!-- Chat -->
+  <div class="chat">
+    <div class="chat-messages" id="chat-messages"></div>
+    <div class="chat-input">
+      <input type="text" id="chat-input" placeholder="Écrire un message...">
+      <button onclick="sendMessage()">Envoyer</button>
+    </div>
+  </div>
+
+  <script>
+    const messages = [];
+    function sendMessage() {
+      const input = document.getElementById("chat-input");
+      const text = input.value.trim();
+      if (text) {
+        messages.push(text);
+        if (messages.length > 5) messages.shift(); // garder 5 messages max
+        const container = document.getElementById("chat-messages");
+        container.innerHTML = messages.map(m => "<div>" + m + "</div>").join("");
+        input.value = "";
+      }
+    }
+  </script>
 </body>
 </html>

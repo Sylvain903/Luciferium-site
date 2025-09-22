@@ -51,11 +51,17 @@
       right: 20px;
       width: 320px;
       height: 180px;
-      background: rgba(0,0,0,0.5);
+      background: black; /* fond noir par défaut */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: gray;
+      font-size: 12px;
     }
     video {
       width: 100%;
       height: 100%;
+      background: black; /* garde noir si pas de vidéo */
     }
 
     /* Zone news */
@@ -119,9 +125,8 @@
 
   <!-- Lecteur vidéo -->
   <div class="video-container">
-    <video controls>
+    <video id="lucifer-video" controls>
       <source src="video.mp4" type="video/mp4">
-      Votre navigateur ne supporte pas la vidéo.
     </video>
   </div>
 

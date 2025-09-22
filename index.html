@@ -7,8 +7,10 @@
   <style>
     html, body {
       margin: 0;
+      padding: 0;
       height: 100%;
       width: 100%;
+      background: black; /* sécurité si l’image ne couvre pas tout */
       overflow: hidden;
     }
     img.bg {
@@ -19,6 +21,7 @@
       height: 100%;
       object-fit: cover;
       z-index: -1;
+      display: block;
     }
     .btn-container {
       position: absolute;
@@ -29,9 +32,9 @@
       width: 100%;
     }
     .btn-luciferium {
-      width: 80%;        /* bouton très large (ajuste : 100% ou 200% si tu veux encore plus) */
-      max-width: 900px;  /* limite sur écrans géants */
-      height: auto;      /* garde les proportions → pas trop haut */
+      width: 80%;        /* très large */
+      max-width: 900px;  /* limite sur grands écrans */
+      height: auto;      /* garde proportions */
       cursor: pointer;
       transition: transform 0.2s ease, filter 0.2s ease;
     }

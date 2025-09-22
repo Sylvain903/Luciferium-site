@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Luciferium - Social</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background: black;
+    }
+    img.bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: fill; /* l’image remplit l’écran */
+      z-index: -1;
+      display: block;
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    .copyright {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+    }
+  </style>
+</head>
+<body>
+  <!-- Fond -->
+  <img src="site-luciferium.png" class="bg" alt="Page Social">
+
+  <!-- Contenu -->
+  <div class="content">
+    <h1>Bienvenue dans Luciferium</h1>
+    <p>Ici commence la véritable expérience.</p>
+  </div>
+
+  <!-- Copyright -->
+  <div class="copyright">
+    © 2025 Nebula Création – Tous droits réservés
+  </div>
+</body>
+</html>

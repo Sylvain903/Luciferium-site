@@ -101,16 +101,16 @@
     /* --- VERSION MOBILE --- */
     @media (max-width: 768px) {
       body {
-        overflow-y: auto; /* activer scroll vertical */
+        overflow-y: auto; /* scroll vertical */
       }
 
-      /* Bouton Luciferium collé en haut */
+      /* Bouton Luciferium tout en haut */
       .btn-container {
         position: relative;
         top: 0;
         left: 0;
         transform: none;
-        margin: 10px auto;
+        margin: 0 auto;
         width: 100%;
       }
       .btn-luciferium {
@@ -120,7 +120,7 @@
         display: block;
       }
 
-      /* Vidéo en dessous */
+      /* Vidéo juste en dessous */
       .video-container {
         position: relative;
         top: auto;
@@ -130,7 +130,7 @@
         margin: 10px auto;
       }
 
-      /* News sous la vidéo */
+      /* News après la vidéo */
       .news {
         position: relative;
         top: auto;
@@ -144,13 +144,13 @@
         margin: 0 10px;
       }
 
-      /* Chat tout en bas */
+      /* Chat collé tout en bas */
       .chat {
         position: relative;
         bottom: auto;
         right: auto;
         width: 90%;
-        margin: 10px auto 20px auto;
+        margin: 10px auto 0 auto;
         height: 100px; /* réduit */
       }
       .chat-messages {

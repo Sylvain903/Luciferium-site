@@ -26,9 +26,9 @@
     }
     .btn-container {
       position: absolute;
-      top: 50%;
+      top: 20%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translateX(-50%);
       text-align: center;
       width: 100%;
     }
@@ -44,13 +44,6 @@
       filter: brightness(1.2);
     }
 
-    /* Conteneur principal pour mobile */
-    .content {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
     /* Vidéo */
     .video-container {
       position: absolute;
@@ -63,34 +56,40 @@
       align-items: center;
       justify-content: center;
     }
-    iframe {
+    video {
       width: 100%;
       height: 100%;
-      border: none;
+      background: black;
     }
 
     /* Zone news */
     .news {
       position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 300px;
+      top: 55%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      text-align: center;
       font-size: 14px;
-      text-align: left;
+      white-space: nowrap;
+    }
+    .news p {
+      display: inline; 
+      margin: 0 10px;
     }
 
-    /* Chat */
+    /* Zone chat réduite */
     .chat {
       position: absolute;
-      bottom: 20px;
-      right: 20px;
-      width: 300px;
+      bottom: 0;
+      left: 0;
+      width: 100%;
       background: rgba(0,0,0,0.3);
-      padding: 10px;
-      border-radius: 5px;
+      padding: 8px;
+      border-top: 1px solid #666;
     }
     .chat-messages {
-      height: 150px;
+      height: 70px; /* moitié moins haut qu’avant */
       overflow: hidden;
       font-size: 13px;
     }
@@ -108,20 +107,6 @@
       font-size: 13px;
       cursor: pointer;
     }
-
-    /* Responsive pour mobile */
-    @media (max-width: 768px) {
-      .video-container,
-      .news,
-      .chat {
-        position: static;
-        width: 100%;
-        margin: 10px 0;
-      }
-      .video-container { order: 1; height: 200px; }
-      .news { order: 2; }
-      .chat { order: 3; }
-    }
   </style>
 </head>
 <body>
@@ -133,27 +118,28 @@
     <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
   </div>
 
-  <!-- Contenu ordonné -->
-  <div class="content">
-    <!-- Lecteur vidéo -->
-    <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/k95JXMWTqIE" allowfullscreen></iframe>
-    </div>
+  <!-- Lecteur vidéo -->
+  <div class="video-container">
+    <video id="lucifer-video" controls poster="acceuil_site.png">
+      <source src="teaser.mp4" type="video/mp4">
+      Votre navigateur ne supporte pas la vidéo.
+    </video>
+  </div>
 
-    <!-- Zone news -->
-    <div class="news">
-      <h3>📰 News</h3>
-      <p>- Luciferium est en ligne !</p>
-      <p>- Bientôt des mises à jour exclusives.</p>
-    </div>
+  <!-- Zone news -->
+  <div class="news">
+    <h3>📰 News :</h3>
+    <p>Luciferium est en ligne !</p>
+    <p>|</p>
+    <p>Bientôt des mises à jour exclusives</p>
+  </div>
 
-    <!-- Chat -->
-    <div class="chat">
-      <div class="chat-messages" id="chat-messages"></div>
-      <div class="chat-input">
-        <input type="text" id="chat-input" placeholder="Écrire un message...">
-        <button onclick="sendMessage()">Envoyer</button>
-      </div>
+  <!-- Chat réduit -->
+  <div class="chat">
+    <div class="chat-messages" id="chat-messages"></div>
+    <div class="chat-input">
+      <input type="text" id="chat-input" placeholder="Écrire un message...">
+      <button onclick="sendMessage()">Envoyer</button>
     </div>
   </div>
 
@@ -164,7 +150,7 @@
       const text = input.value.trim();
       if (text) {
         messages.push(text);
-        if (messages.length > 5) messages.shift(); // garder 5 messages max
+        if (messages.length > 5) messages.shift();
         const container = document.getElementById("chat-messages");
         container.innerHTML = messages.map(m => "<div>" + m + "</div>").join("");
         input.value = "";

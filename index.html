@@ -11,6 +11,7 @@
       height: 100%;
       width: 100%;
       overflow: hidden;
+      background: black; /* sécurité si l’image ne charge pas */
     }
     img.bg {
       position: fixed;
@@ -18,7 +19,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: fill; /* ✅ image entière, élargie sur toute la page */
+      object-fit: fill;  /* image entière, étirée comme tu voulais */
       z-index: -1;
       display: block;
     }
@@ -31,15 +32,23 @@
       width: 100%;
     }
     .btn-luciferium {
-      width: 100%;        /* bouton énorme */
+      width: 100%;        /* bouton très large */
       max-width: 1200px;  /* limite sur très grands écrans */
-      height: auto;       /* garde proportions */
+      height: auto;       /* garde les proportions */
       cursor: pointer;
       transition: transform 0.2s ease, filter 0.2s ease;
     }
     .btn-luciferium:hover {
       transform: scale(1.05);
       filter: brightness(1.2);
+    }
+    .copyright {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
     }
   </style>
 </head>
@@ -49,9 +58,14 @@
 
   <!-- Bouton centré géant -->
   <div class="btn-container">
-    <a href="site_luciferium.html">
+    <a href="social.html">
       <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
     </a>
+  </div>
+
+  <!-- Copyright -->
+  <div class="copyright">
+    © 2025 Nebula Création – Tous droits réservés
   </div>
 </body>
 </html>

@@ -20,7 +20,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover; /* image adaptative PC + mobile */
+      object-fit: cover;
       z-index: -1;
       display: block;
     }
@@ -100,50 +100,61 @@
 
     /* --- VERSION MOBILE --- */
     @media (max-width: 768px) {
-      /* Vidéo en haut, largeur 100% */
-      .video-container {
-        position: relative;
-        top: 0;
-        right: 0;
-        width: 100%;
-        height: 200px;
-        margin-top: 10px;
+      body {
+        overflow-y: auto; /* activer scroll vertical */
       }
 
-      /* Bouton Luciferium toujours centré */
+      /* Bouton Luciferium collé en haut */
       .btn-container {
         position: relative;
-        top: auto;
-        left: auto;
+        top: 0;
+        left: 0;
         transform: none;
-        margin-top: 15px;
+        margin: 10px auto;
+        width: 100%;
+      }
+      .btn-luciferium {
+        max-width: 90%;
+        height: auto;
+        margin: 0 auto;
+        display: block;
       }
 
-      /* News en dessous du bouton, largeur écran */
+      /* Vidéo en dessous */
+      .video-container {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 90%;
+        height: 180px;
+        margin: 10px auto;
+      }
+
+      /* News sous la vidéo */
       .news {
         position: relative;
         top: auto;
         left: auto;
-        width: 100%;
-        margin-top: 15px;
+        width: 90%;
+        margin: 10px auto;
         text-align: center;
       }
       .news p {
-        display: inline-block; /* côte à côte */
+        display: inline-block;
         margin: 0 10px;
       }
 
-      /* Chat tout en bas, réduit */
+      /* Chat tout en bas */
       .chat {
         position: relative;
         bottom: auto;
         right: auto;
-        width: 100%;
-        margin-top: 15px;
-        height: 120px; /* moitié moins haut */
+        width: 90%;
+        margin: 10px auto 20px auto;
+        height: 100px; /* réduit */
       }
       .chat-messages {
-        height: 70px;
+        height: 60px;
       }
     }
   </style>

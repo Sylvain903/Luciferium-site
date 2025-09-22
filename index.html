@@ -20,15 +20,15 @@
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: fill;
+      object-fit: cover; /* fond adaptatif (mobile inclus) */
       z-index: -1;
       display: block;
     }
     .btn-container {
       position: absolute;
-      top: 20%;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%);
       text-align: center;
       width: 100%;
     }
@@ -44,52 +44,42 @@
       filter: brightness(1.2);
     }
 
-    /* Vidéo */
+    /* Vidéo YouTube */
     .video-container {
       position: absolute;
       top: 20px;
       right: 20px;
       width: 320px;
       height: 180px;
-      background: black;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
-    video {
+    .video-container iframe {
       width: 100%;
       height: 100%;
-      background: black;
+      border: none;
     }
 
     /* Zone news */
     .news {
       position: absolute;
-      top: 55%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      text-align: center;
+      top: 20px;
+      left: 20px;
+      width: 300px;
       font-size: 14px;
-      white-space: nowrap;
-    }
-    .news p {
-      display: inline; 
-      margin: 0 10px;
+      text-align: left;
     }
 
-    /* Zone chat réduite */
+    /* Zone chat */
     .chat {
       position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
+      bottom: 20px;
+      right: 20px;
+      width: 300px;
       background: rgba(0,0,0,0.3);
-      padding: 8px;
-      border-top: 1px solid #666;
+      padding: 10px;
+      border-radius: 5px;
     }
     .chat-messages {
-      height: 70px; /* moitié moins haut qu’avant */
+      height: 150px;
       overflow: hidden;
       font-size: 13px;
     }
@@ -118,23 +108,22 @@
     <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
   </div>
 
-  <!-- Lecteur vidéo -->
+  <!-- Lecteur vidéo YouTube -->
   <div class="video-container">
-    <video id="lucifer-video" controls poster="acceuil_site.png">
-      <source src="teaser.mp4" type="video/mp4">
-      Votre navigateur ne supporte pas la vidéo.
-    </video>
+    <iframe src="https://www.youtube.com/embed/k95JXMWTqIE" 
+            title="Teaser Luciferium"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen></iframe>
   </div>
 
   <!-- Zone news -->
   <div class="news">
-    <h3>📰 News :</h3>
-    <p>Luciferium est en ligne !</p>
-    <p>|</p>
-    <p>Bientôt des mises à jour exclusives</p>
+    <h3>📰 News</h3>
+    <p>- Luciferium est en ligne !</p>
+    <p>- Bientôt des mises à jour exclusives.</p>
   </div>
 
-  <!-- Chat réduit -->
+  <!-- Chat -->
   <div class="chat">
     <div class="chat-messages" id="chat-messages"></div>
     <div class="chat-input">
@@ -150,7 +139,7 @@
       const text = input.value.trim();
       if (text) {
         messages.push(text);
-        if (messages.length > 5) messages.shift();
+        if (messages.length > 5) messages.shift(); // garder 5 messages max
         const container = document.getElementById("chat-messages");
         container.innerHTML = messages.map(m => "<div>" + m + "</div>").join("");
         input.value = "";

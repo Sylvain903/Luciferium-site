@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Accueil - Luciferium</title>
   <style>
+    /* ====== PC (inchangé) ====== */
     html, body {
       margin: 0;
       padding: 0;
@@ -43,8 +44,6 @@
       transform: scale(1.05);
       filter: brightness(1.2);
     }
-
-    /* Vidéo */
     .video-container {
       position: absolute;
       top: 20px;
@@ -56,12 +55,7 @@
       align-items: center;
       justify-content: center;
     }
-    .video-container iframe {
-      width: 100%;
-      height: 100%;
-    }
-
-    /* Zone news */
+    .video-container iframe { width: 100%; height: 100%; }
     .news {
       position: absolute;
       top: 20px;
@@ -70,8 +64,6 @@
       font-size: 14px;
       text-align: left;
     }
-
-    /* Chat */
     .chat {
       position: absolute;
       bottom: 20px;
@@ -81,80 +73,68 @@
       padding: 10px;
       border-radius: 5px;
     }
-    .chat-messages {
-      height: 150px;
-      overflow: hidden;
-      font-size: 13px;
-    }
-    .chat-input {
-      margin-top: 5px;
-      display: flex;
-    }
-    .chat-input input {
-      flex: 1;
-      padding: 5px;
-      font-size: 13px;
-    }
-    .chat-input button {
-      padding: 5px;
-      font-size: 13px;
-      cursor: pointer;
-    }
+    .chat-messages { height: 150px; overflow: hidden; font-size: 13px; }
+    .chat-input { margin-top: 5px; display: flex; }
+    .chat-input input { flex: 1; padding: 5px; font-size: 13px; }
+    .chat-input button { padding: 5px; font-size: 13px; cursor: pointer; }
 
-    /* VERSION MOBILE */
+    /* ====== MOBILE UNIQUEMENT ====== */
     @media (max-width: 768px) {
+      /* Permettre le scroll et réserver l'espace pour le chat */
+      body { overflow: auto; padding-bottom: 140px; }
+
+      /* Bouton en haut, pleine largeur, hauteur réduite */
       .btn-container {
-        position: relative; /* reste en haut */
-        top: 0;
-        left: 0;
+        position: relative;   /* reste en haut */
+        top: 0; left: 0;
         transform: none;
         width: 100%;
         margin: 0;
         text-align: center;
       }
       .btn-luciferium {
-        width: 100%;        /* prend toute la largeur */
-        height: auto;       /* garde proportions */
-        max-height: 60px;   /* conserve hauteur réduite */
-        object-fit: contain;
+        display: block;
+        width: 100vw;         /* prend toute la largeur écran */
+        height: 60px;         /* hauteur réduite conservée */
+        object-fit: fill;     /* remplit sans laisser de bords */
       }
 
+      /* Vidéo sous le bouton */
       .video-container {
         position: relative;
-        top: 0;
-        right: 0;
+        top: 0; right: 0;
         width: 100%;
         height: auto;
-        margin: 0;
+        margin: 8px 0 0 0;
       }
-      .video-container iframe {
-        width: 100%;
-        height: 200px;
-      }
+      .video-container iframe { width: 100%; height: 200px; }
 
+      /* News sous la vidéo */
       .news {
         position: relative;
-        top: 0;
-        left: 0;
+        top: 0; left: 0;
         width: 100%;
         margin: 10px 0;
         text-align: center;
       }
 
+      /* Chat fixé, bien visible au-dessus des barres système */
       .chat {
-        position: fixed;    /* collé en bas */
-        bottom: 0;
-        left: 0;
+        position: fixed;
+        bottom: 0; left: 0;
         width: 100%;
         height: 120px;
         margin: 0;
         border-radius: 0;
+        z-index: 9999;
+        padding-bottom: calc(10px + env(safe-area-inset-bottom));
+        background: rgba(0,0,0,0.45);
       }
+      .chat-messages { height: 70px; overflow: auto; }
     }
   </style>
 </head>
 <body>
-  <!-- Fond accueil -->
   <img src="acceuil_site.png" class="bg" alt="Accueil Luciferium">
 
   <!-- Bouton en haut -->
@@ -162,7 +142,7 @@
     <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
   </div>
 
-  <!-- Lecteur vidéo YouTube -->
+  <!-- Vidéo -->
   <div class="video-container">
     <iframe src="https://www.youtube.com/embed/k95JXMWTqIE"
             frameborder="0"
@@ -170,7 +150,7 @@
             allowfullscreen></iframe>
   </div>
 
-  <!-- Zone news -->
+  <!-- News -->
   <div class="news">
     <h3>📰 News</h3>
     <p>- Luciferium est en ligne !</p>

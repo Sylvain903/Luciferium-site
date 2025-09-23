@@ -95,27 +95,10 @@
         width: 100vw;       /* pleine largeur */
         height: 60px;       /* hauteur réduite */
         object-fit: fill;
-
-        /* Effets animés */
-        animation: pulse 2.5s infinite;
-        transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.3s ease;
-      }
-      .btn-luciferium:active {
-        transform: scale(0.95); /* effet pressé */
-      }
-      .btn-luciferium:hover {
-        filter: brightness(1.2);
-        box-shadow: 0 0 15px rgba(255, 0, 0, 0.7); /* glow rouge */
-      }
-      @keyframes pulse {
-        0%   { transform: scale(1);   filter: brightness(1); }
-        50%  { transform: scale(1.03); filter: brightness(1.15); }
-        100% { transform: scale(1);   filter: brightness(1); }
       }
 
       .video-container {
         position: relative;
-        top: 0; right: 0;
         width: 100%;
         height: auto;
         margin: 8px 0 0 0;
@@ -124,7 +107,6 @@
 
       .news {
         position: relative;
-        top: 0; left: 0;
         width: 100%;
         margin: 10px 0;
         text-align: center;
@@ -138,54 +120,63 @@
         margin: 0;
         border-radius: 0;
         z-index: 9999;
-        padding-bottom: calc(10px + env(safe-area-inset-bottom));
         background: rgba(0,0,0,0.45);
       }
       .chat-messages { height: 70px; overflow: auto; }
     }
 
-    /* ====== MOBILE : LANDSCAPE = PC MODE ====== */
+    /* ====== MOBILE : LANDSCAPE (affichage type PC mais réduit) ====== */
     @media (max-width: 768px) and (orientation: landscape) {
+      body { overflow: auto; }
+
       .btn-container {
         position: absolute;
-        top: 50%;
+        top: 45%;
         left: 50%;
         transform: translate(-50%, -50%);
         text-align: center;
-        width: 100%;
+        width: 90%;
       }
       .btn-luciferium {
         width: 100%;
-        max-width: 1200px;
+        max-width: 800px;
         height: auto;
       }
+
       .video-container {
         position: absolute;
-        top: 20px;
-        right: 20px;
-        width: 320px;
-        height: 180px;
+        top: 10px;
+        right: 10px;
+        width: 220px;   /* réduit par rapport au PC */
+        height: 124px;  /* ratio 16:9 */
       }
+      .video-container iframe { width: 100%; height: 100%; }
+
       .news {
         position: absolute;
-        top: 20px;
-        left: 20px;
-        width: 300px;
+        top: 10px;
+        left: 10px;
+        width: 220px;   /* réduit */
+        font-size: 12px;
         text-align: left;
       }
+
       .chat {
-        position: absolute;
-        bottom: 20px;
-        right: 20px;
-        width: 300px;
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        width: 250px;   /* réduit */
+        z-index: 9999;
+        background: rgba(0,0,0,0.45);
       }
+      .chat-messages { height: 100px; overflow: auto; font-size: 12px; }
     }
   </style>
 </head>
 <body>
   <img src="acceuil_site.png" class="bg" alt="Accueil Luciferium">
 
-  <!-- Bouton en haut -->
+  <!-- Bouton -->
   <div class="btn-container">
     <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
   </div>

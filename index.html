@@ -80,12 +80,11 @@
 
     /* ====== MOBILE UNIQUEMENT ====== */
     @media (max-width: 768px) {
-      /* Permettre le scroll et réserver l'espace pour le chat */
       body { overflow: auto; padding-bottom: 140px; }
 
-      /* Bouton en haut, pleine largeur, hauteur réduite */
+      /* Bouton Luciferium en haut */
       .btn-container {
-        position: relative;   /* reste en haut */
+        position: relative;
         top: 0; left: 0;
         transform: none;
         width: 100%;
@@ -94,9 +93,25 @@
       }
       .btn-luciferium {
         display: block;
-        width: 100vw;         /* prend toute la largeur écran */
-        height: 60px;         /* hauteur réduite conservée */
-        object-fit: fill;     /* remplit sans laisser de bords */
+        width: 100vw;       /* pleine largeur */
+        height: 60px;       /* hauteur réduite */
+        object-fit: fill;
+
+        /* Effets animés */
+        animation: pulse 2.5s infinite;
+        transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.3s ease;
+      }
+      .btn-luciferium:active {
+        transform: scale(0.95); /* effet pressé */
+      }
+      .btn-luciferium:hover {
+        filter: brightness(1.2);
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.7); /* glow rouge léger */
+      }
+      @keyframes pulse {
+        0%   { transform: scale(1);   filter: brightness(1); }
+        50%  { transform: scale(1.03); filter: brightness(1.15); }
+        100% { transform: scale(1);   filter: brightness(1); }
       }
 
       /* Vidéo sous le bouton */
@@ -118,7 +133,7 @@
         text-align: center;
       }
 
-      /* Chat fixé, bien visible au-dessus des barres système */
+      /* Chat fixé en bas */
       .chat {
         position: fixed;
         bottom: 0; left: 0;

@@ -64,19 +64,6 @@
       font-size: 14px;
       text-align: left;
     }
-    .chat {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      width: 300px;
-      background: rgba(0,0,0,0.3);
-      padding: 10px;
-      border-radius: 5px;
-    }
-    .chat-messages { height: 150px; overflow: hidden; font-size: 13px; }
-    .chat-input { margin-top: 5px; display: flex; }
-    .chat-input input { flex: 1; padding: 5px; font-size: 13px; }
-    .chat-input button { padding: 5px; font-size: 13px; cursor: pointer; }
 
     /* ====== MOBILE : PORTRAIT ====== */
     @media (max-width: 768px) and (orientation: portrait) {
@@ -111,18 +98,6 @@
         margin: 10px 0;
         text-align: center;
       }
-
-      .chat {
-        position: fixed;
-        bottom: 0; left: 0;
-        width: 100%;
-        height: 120px;
-        margin: 0;
-        border-radius: 0;
-        z-index: 9999;
-        background: rgba(0,0,0,0.45);
-      }
-      .chat-messages { height: 70px; overflow: auto; }
     }
 
     /* ====== MOBILE : LANDSCAPE (affichage type PC mais réduit) ====== */
@@ -160,16 +135,6 @@
         font-size: 12px;
         text-align: left;
       }
-
-      .chat {
-        position: fixed;
-        bottom: 10px;
-        right: 10px;
-        width: 250px;   /* réduit */
-        z-index: 9999;
-        background: rgba(0,0,0,0.45);
-      }
-      .chat-messages { height: 100px; overflow: auto; font-size: 12px; }
     }
   </style>
 </head>
@@ -196,28 +161,19 @@
     <p>- Bientôt des mises à jour exclusives.</p>
   </div>
 
-  <!-- Chat -->
-  <div class="chat">
-    <div class="chat-messages" id="chat-messages"></div>
-    <div class="chat-input">
-      <input type="text" id="chat-input" placeholder="Écrire un message...">
-      <button onclick="sendMessage()">Envoyer</button>
-    </div>
-  </div>
-
-  <script>
-    const messages = [];
-    function sendMessage() {
-      const input = document.getElementById("chat-input");
-      const text = input.value.trim();
-      if (text) {
-        messages.push(text);
-        if (messages.length > 5) messages.shift();
-        const container = document.getElementById("chat-messages");
-        container.innerHTML = messages.map(m => "<div>" + m + "</div>").join("");
-        input.value = "";
-      }
-    }
+  <!-- Start of Tawk.to Script -->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/68d24a704ce8711925fa753f/1j5qn5if8';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
   </script>
+  <!-- End of Tawk.to Script -->
+
 </body>
 </html>

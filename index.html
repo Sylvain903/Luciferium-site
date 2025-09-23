@@ -103,15 +103,8 @@
 
     /* VERSION MOBILE */
     @media (max-width: 768px) {
-      body {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-      }
-
       .btn-container {
-        position: relative;
+        position: relative; /* reste en haut */
         top: 0;
         left: 0;
         transform: none;
@@ -120,9 +113,9 @@
         text-align: center;
       }
       .btn-luciferium {
-        width: 100%;        /* pleine largeur */
+        width: 100%;        /* prend toute la largeur */
         height: auto;       /* garde proportions */
-        max-height: 60px;   /* hauteur réduite comme tu voulais */
+        max-height: 60px;   /* conserve hauteur réduite */
         object-fit: contain;
       }
 

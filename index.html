@@ -60,9 +60,9 @@
       position: absolute;
       top: 20px; left: 20px;
       width: 300px; font-size: 14px; text-align: left;
-      line-height: 1.4;       /* espace entre lignes */
-      max-height: none;       /* pas de limite verticale */
-      overflow: visible;      /* empêche de couper les news */
+      line-height: 1.4;
+      max-height: none;
+      overflow: visible;
     }
 
     .chat {
@@ -99,22 +99,18 @@
       .chat { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; margin: 0 auto; border-radius: 0; }
     }
 
-    /* MOBILE paysage — même disposition que PC, sans slide */
+    /* MOBILE paysage */
     @media (max-width: 1024px) and (orientation: landscape) {
       html, body { overflow-x: hidden; }
 
-      /* Logo centré et visible */
       .btn-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: auto; z-index: 5; }
       .btn-luciferium { width: 90%; max-width: 90%; max-height: 240px; animation: pulseGlow 2s infinite, glitch 6s infinite; }
 
-      /* News */
       .news { position: absolute; top: 10px; left: 10px; width: 40%; font-size: 11px; line-height: 1.4; }
 
-      /* Vidéo */
       .video-container { position: absolute; top: 10px; right: 10px; width: 220px; height: 130px; max-width: 220px; }
       .video-container iframe { width: 100%; height: 100%; }
 
-      /* Chat sous la vidéo, 3 messages, pas d’overflow interne */
       .chat { position: absolute; right: 10px; bottom: 10px; width: 220px; max-width: calc(100vw - 20px); }
       .chat-messages { height: 60px; }
       .chat-input input { min-width: 0; }
@@ -129,8 +125,17 @@
     <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
   </div>
 
-  <div class="video-container">
-    <iframe src="https://youtu.be/QHIYjBSUTBU"
+  <!-- VIDEO PC -->
+  <div id="video-youtube-site" class="video-container">
+    <iframe src="https://www.youtube.com/embed/QHIYjBSUTBU"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+  </div>
+
+  <!-- VIDEO MOBILE -->
+  <div id="video-youtube-mobile" class="video-container">
+    <iframe src="https://www.youtube.com/embed/QHIYjBSUTBU"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen></iframe>
@@ -201,4 +206,3 @@
   </script>
 </body>
 </html>
-

@@ -27,7 +27,7 @@
       display: block;
     }
 
-    /* Logo (par défaut PC) */
+    /* Logo (PC par défaut) */
     .btn-container {
       position: absolute;
       top: 50%;
@@ -172,7 +172,7 @@
 
     /* -------- MOBILE LANDSCAPE -------- */
     @media (max-width: 1024px) and (orientation: landscape) {
-      /* Logo centré au milieu, réduit */
+      /* Logo centré comme avant */
       .btn-container {
         position: absolute;
         top: 50%;
@@ -182,8 +182,8 @@
         width: auto;
       }
       .btn-luciferium {
-        width: 35%;
-        max-height: 90px;
+        width: 50%; /* plus grand qu’avant */
+        max-height: 140px;
       }
 
       /* News en haut gauche */
@@ -200,18 +200,20 @@
         position: absolute;
         top: 10px;
         right: 10px;
-        width: 200px;
-        height: 120px;
+        width: 220px;
+        height: 130px;
       }
       .video-container iframe { width: 100%; height: 100%; }
 
-      /* Chat en bas droite, sous la vidéo, séparé */
+      /* Chat en bas droite, réduit pour 3 messages */
       .chat {
         position: absolute;
         right: 10px;
         bottom: 10px;
-        width: 200px;
-        margin-top: 10px; /* espace pour ne pas coller */
+        width: 220px;
+      }
+      .chat-messages {
+        height: 60px; /* réduit pour ~3 messages max */
       }
     }
   </style>

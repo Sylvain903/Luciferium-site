@@ -15,228 +15,117 @@
       color: white;
     }
 
-    /* Background */
     img.bg {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       object-fit: fill;
-      z-index: -1;
-      display: block;
+      z-index: -1; display: block;
     }
 
-    /* Logo (PC par défaut) */
     .btn-container {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      text-align: center;
-      width: 100%;
+      text-align: center; width: 100%;
     }
     .btn-luciferium {
-      width: 100%;
-      max-width: 1200px;
-      height: auto;
-      cursor: pointer;
-      transition: transform 0.2s ease, filter 0.2s ease;
+      width: 100%; max-width: 1200px; height: auto;
+      cursor: pointer; transition: transform .2s, filter .2s;
       animation: pulseGlow 2s infinite, glitch 6s infinite;
     }
-    .btn-luciferium:hover {
-      transform: scale(1.05);
-      filter: brightness(1.2);
-    }
+    .btn-luciferium:hover { transform: scale(1.05); filter: brightness(1.2); }
 
-    /* Glow + glitch */
     @keyframes pulseGlow {
-      0%, 100% { filter: drop-shadow(0 0 6px #ff0000) drop-shadow(0 0 12px #ff4500); }
-      50% { filter: drop-shadow(0 0 12px #ff0000) drop-shadow(0 0 24px #ff6600); }
+      0%,100%{filter:drop-shadow(0 0 6px #f00) drop-shadow(0 0 12px #f4500)}
+      50%{filter:drop-shadow(0 0 12px #f00) drop-shadow(0 0 24px #f60)}
     }
     @keyframes glitch {
-      0%, 95%, 100% { transform: none; }
-      96% { transform: translateX(-2px) skewX(-5deg); }
-      97% { transform: translateX(2px) skewX(5deg); }
-      98% { transform: translateX(-1px) skewX(-3deg); }
-      99% { transform: translateX(1px) skewX(3deg); }
+      0%,95%,100%{transform:none}
+      96%{transform:translateX(-2px) skewX(-5deg)}
+      97%{transform:translateX(2px) skewX(5deg)}
+      98%{transform:translateX(-1px) skewX(-3deg)}
+      99%{transform:translateX(1px) skewX(3deg)}
     }
 
-    /* Vidéo (PC) */
     .video-container {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 320px;
-      height: 180px;
-      background: black;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      top: 20px; right: 20px;
+      width: 320px; height: 180px;
+      background: black; display: flex; align-items: center; justify-content: center;
     }
     .video-container iframe { width: 100%; height: 100%; }
 
-    /* News (PC) */
     .news {
       position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 300px;
-      font-size: 14px;
-      text-align: left;
+      top: 20px; left: 20px;
+      width: 300px; font-size: 14px; text-align: left;
     }
 
-    /* Chat (PC) */
     .chat {
       position: fixed;
-      right: 20px;
-      bottom: 20px;
-      width: 320px;
-      box-sizing: border-box;
-      background: rgba(0,0,0,0.70);
-      padding: 10px;
-      border-radius: 6px;
+      right: 20px; bottom: 20px;
+      width: 320px; box-sizing: border-box;
+      background: rgba(0,0,0,.7); padding: 10px; border-radius: 6px;
     }
     .chat-messages {
-      height: 120px;
-      overflow-y: auto;
-      font-size: 13px;
-      line-height: 1.35;
-      margin-bottom: 6px;
+      height: 120px; overflow-y: auto;
+      font-size: 13px; line-height: 1.35; margin-bottom: 6px;
     }
     .chat-msg { padding: 2px 0; word-wrap: break-word; }
     .chat-input { display: flex; gap: 6px; }
     .chat-input input {
-      flex: 1;
-      padding: 8px;
-      font-size: 13px;
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(0,0,0,0.35);
-      color: #fff;
+      flex: 1; padding: 8px; font-size: 13px;
+      border:1px solid rgba(255,255,255,.25);
+      background: rgba(0,0,0,.35); color:#fff;
     }
     .chat-input button {
-      padding: 8px 12px;
-      font-size: 13px;
-      cursor: pointer;
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(255,255,255,0.1);
-      color: #fff;
+      padding: 8px 12px; font-size: 13px; cursor: pointer;
+      border:1px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,.1); color:#fff;
+      white-space: nowrap;
     }
 
-    /* -------- MOBILE PORTRAIT -------- */
+    /* MOBILE portrait */
     @media (max-width: 768px) and (orientation: portrait) {
-      .btn-container {
-        position: relative;
-        top: 0; left: 0;
-        transform: none;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-      }
-      .btn-luciferium {
-        width: 100%;
-        max-height: 120px;
-        object-fit: contain;
-        display: block;
-        margin: 0 auto;
-      }
-      .video-container {
-        position: relative;
-        top: 0;
-        right: 0;
-        width: 100%;
-        height: auto;
-        margin: 0;
-        padding: 0;
-      }
+      .btn-container { position: relative; top: 0; left: 0; transform: none; width: 100%; margin: 0; padding: 0; text-align: center; }
+      .btn-luciferium { width: 100%; max-height: 120px; object-fit: contain; display: block; margin: 0 auto; }
+      .video-container { position: relative; top: 0; right: 0; width: 100%; height: auto; margin: 0; padding: 0; }
       .video-container iframe { height: 200px; }
-      .news {
-        position: relative;
-        top: 0;
-        left: 0;
-        width: 100%;
-        margin: 10px 0;
-        text-align: center;
-      }
-      .chat {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        margin: 0 auto;
-        border-radius: 0;
-      }
+      .news { position: relative; top: 0; left: 0; width: 100%; margin: 10px 0; text-align: center; }
+      .chat { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; margin: 0 auto; border-radius: 0; }
     }
 
-    /* -------- MOBILE LANDSCAPE -------- */
+    /* MOBILE paysage — même disposition que PC, sans slide */
     @media (max-width: 1024px) and (orientation: landscape) {
-      html, body {
-        overflow-x: hidden; /* pas de slider horizontal */
-      }
+      html, body { overflow-x: hidden; }
 
-      /* Logo centré et agrandi */
-      .btn-container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        width: auto;
-        z-index: 5;
-      }
-      .btn-luciferium {
-        width: 90%;       /* agrandi de 50% */
-        max-height: 240px;
-        max-width: 90%;   /* sécurité anti-débordement */
-        animation: pulseGlow 2s infinite, glitch 6s infinite;
-      }
+      /* Logo centré et visible */
+      .btn-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: auto; z-index: 5; }
+      .btn-luciferium { width: 90%; max-width: 90%; max-height: 240px; animation: pulseGlow 2s infinite, glitch 6s infinite; }
 
-      /* News en haut gauche */
-      .news {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        width: 40%;
-        font-size: 11px;
-      }
+      /* News */
+      .news { position: absolute; top: 10px; left: 10px; width: 40%; font-size: 11px; }
 
-      /* Vidéo en haut droite */
-      .video-container {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        width: 220px;
-        height: 130px;
-        max-width: 220px; /* sécurité */
-      }
+      /* Vidéo */
+      .video-container { position: absolute; top: 10px; right: 10px; width: 220px; height: 130px; max-width: 220px; }
       .video-container iframe { width: 100%; height: 100%; }
 
-      /* Chat en bas droite, limité à 3 messages */
-      .chat {
-        position: absolute;
-        right: 10px;
-        bottom: 10px;
-        width: 220px;
-        max-width: 220px; /* sécurité */
-      }
-      .chat-messages {
-        height: 60px; /* environ 3 messages max */
-      }
+      /* Chat sous la vidéo, 3 messages, pas d’overflow interne */
+      .chat { position: absolute; right: 10px; bottom: 10px; width: 220px; max-width: calc(100vw - 20px); }
+      .chat-messages { height: 60px; }
+      .chat-input input { min-width: 0; }          /* autorise le shrink, évite le débordement */
+      .chat { overflow: hidden; }                   /* coupe toute fuite interne éventuelle */
     }
   </style>
 </head>
 <body>
-  <!-- Fond accueil -->
   <img src="acceuil_site.png" class="bg" alt="Accueil Luciferium">
 
-  <!-- Logo -->
   <div class="btn-container">
     <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
   </div>
 
-  <!-- Lecteur vidéo YouTube -->
   <div class="video-container">
     <iframe src="https://www.youtube.com/embed/k95JXMWTqIE"
             frameborder="0"
@@ -244,14 +133,12 @@
             allowfullscreen></iframe>
   </div>
 
-  <!-- Zone news -->
   <div class="news">
     <h3>📰 News</h3>
     <p>- Luciferium est en ligne !</p>
     <p>- Bientôt des mises à jour exclusives.</p>
   </div>
 
-  <!-- Chat -->
   <div class="chat">
     <div id="chat-messages" class="chat-messages"></div>
     <div class="chat-input">
@@ -260,7 +147,6 @@
     </div>
   </div>
 
-  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
@@ -280,8 +166,8 @@
     const messagesRef = db.ref("messages");
 
     const $messages = document.getElementById("chat-messages");
-    const $input    = document.getElementById("chat-input");
-    const $sendBtn  = document.getElementById("send-btn");
+    const $input = document.getElementById("chat-input");
+    const $sendBtn = document.getElementById("send-btn");
 
     function renderMessage(text){
       const div = document.createElement("div");

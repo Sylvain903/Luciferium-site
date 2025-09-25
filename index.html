@@ -170,20 +170,20 @@
       }
     }
 
-    /* -------- MOBILE LANDSCAPE = disposition PC adaptée -------- */
+    /* -------- MOBILE LANDSCAPE -------- */
     @media (max-width: 1024px) and (orientation: landscape) {
-      /* Logo centré */
+      /* Logo centré au milieu, réduit */
       .btn-container {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         text-align: center;
-        width: 100%;
+        width: auto;
       }
       .btn-luciferium {
-        width: 60%;
-        max-height: 140px;
+        width: 35%;
+        max-height: 90px;
       }
 
       /* News en haut gauche */
@@ -191,26 +191,27 @@
         position: absolute;
         top: 10px;
         left: 10px;
-        width: 45%;
-        font-size: 12px;
+        width: 40%;
+        font-size: 11px;
       }
 
-      /* Vidéo en haut droite */
+      /* Vidéo en haut droite réduite */
       .video-container {
         position: absolute;
         top: 10px;
         right: 10px;
-        width: 240px;
-        height: 140px;
+        width: 200px;
+        height: 120px;
       }
       .video-container iframe { width: 100%; height: 100%; }
 
-      /* Chat en bas droite sous la vidéo */
+      /* Chat en bas droite, sous la vidéo, séparé */
       .chat {
         position: absolute;
         right: 10px;
         bottom: 10px;
-        width: 240px;
+        width: 200px;
+        margin-top: 10px; /* espace pour ne pas coller */
       }
     }
   </style>

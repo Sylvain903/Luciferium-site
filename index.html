@@ -172,6 +172,10 @@
 
     /* -------- MOBILE LANDSCAPE -------- */
     @media (max-width: 1024px) and (orientation: landscape) {
+      html, body {
+        overflow-x: hidden; /* pas de slider horizontal */
+      }
+
       /* Logo centré et agrandi */
       .btn-container {
         position: absolute;
@@ -185,6 +189,7 @@
       .btn-luciferium {
         width: 90%;       /* agrandi de 50% */
         max-height: 240px;
+        max-width: 90%;   /* sécurité anti-débordement */
         animation: pulseGlow 2s infinite, glitch 6s infinite;
       }
 
@@ -204,6 +209,7 @@
         right: 10px;
         width: 220px;
         height: 130px;
+        max-width: 220px; /* sécurité */
       }
       .video-container iframe { width: 100%; height: 100%; }
 
@@ -213,6 +219,7 @@
         right: 10px;
         bottom: 10px;
         width: 220px;
+        max-width: 220px; /* sécurité */
       }
       .chat-messages {
         height: 60px; /* environ 3 messages max */

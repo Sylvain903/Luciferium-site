@@ -24,43 +24,30 @@
       z-index: -1;
       display: block;
     }
-
-    /* Logo centré géant */
     .btn-container {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       text-align: center;
-      margin: 0;
+      width: 100%;
     }
     .btn-luciferium {
-      width: 100%; /* pleine largeur */
+      width: 100%;
       max-width: 1200px;
       height: auto;
       cursor: pointer;
       transition: transform 0.2s ease, filter 0.2s ease;
-      animation: pulseGlow 2s infinite; /* effet lumineux */
     }
     .btn-luciferium:hover {
       transform: scale(1.05);
       filter: brightness(1.2);
     }
 
-    /* Glow rouge pulsant */
-    @keyframes pulseGlow {
-      0%, 100% {
-        filter: drop-shadow(0 0 6px #ff0000) drop-shadow(0 0 12px #ff4500);
-      }
-      50% {
-        filter: drop-shadow(0 0 12px #ff0000) drop-shadow(0 0 24px #ff6600);
-      }
-    }
-
     /* Vidéo */
     .video-container {
       position: absolute;
-      top: 120px;
+      top: 20px;
       right: 20px;
       width: 320px;
       height: 180px;
@@ -74,14 +61,14 @@
     /* Zone news */
     .news {
       position: absolute;
-      top: 120px;
+      top: 20px;
       left: 20px;
       width: 300px;
       font-size: 14px;
       text-align: left;
     }
 
-    /* Zone chat (bas à droite) */
+    /* Zone chat — seule modif : coin bas droite 320px */
     .chat {
       position: fixed;
       right: 20px;
@@ -90,7 +77,6 @@
       box-sizing: border-box;
       background: rgba(0,0,0,0.70);
       padding: 10px;
-      border-radius: 8px;
     }
     .chat-messages {
       height: 120px;
@@ -126,8 +112,8 @@
         width: 100%; margin: 0; text-align: center;
       }
       .btn-luciferium {
-        width: 100%;  /* toujours pleine largeur */
-        max-height: none;
+        width: 100%;
+        max-height: 60px;
         object-fit: contain;
       }
       .video-container { position: relative; top: 0; right: 0; width: 100%; height: auto; margin: 0; }
@@ -140,7 +126,7 @@
   <!-- Fond accueil -->
   <img src="acceuil_site.png" class="bg" alt="Accueil Luciferium">
 
-  <!-- Logo en haut -->
+  <!-- Bouton centré géant -->
   <div class="btn-container">
     <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
   </div>
@@ -174,6 +160,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
   <script>
+    // TA CONFIG (celle que tu m'as donnée)
     const firebaseConfig = {
       apiKey: "AIzaSyBb8V6rxwCbV8TA22ccIYjuaP27cLlWX60",
       authDomain: "luciferiumchat.firebaseapp.com",
@@ -188,6 +175,7 @@
     const db = firebase.database();
     const messagesRef = db.ref("messages");
 
+    // UI
     const $messages = document.getElementById("chat-messages");
     const $input    = document.getElementById("chat-input");
     const $sendBtn  = document.getElementById("send-btn");
@@ -203,6 +191,7 @@
     function sendMessage(){
       const text = ($input.value || "").trim();
       if(!text) return;
+      // 200 caractères max côté client (en plus de la règle serveur)
       const trimmed = text.substring(0, 200);
       messagesRef.push({ text: trimmed, timestamp: Date.now() });
       $input.value = "";
@@ -213,6 +202,7 @@
       if(e.key === "Enter"){ e.preventDefault(); sendMessage(); }
     });
 
+    // Écoute en direct des 10 derniers messages (ordre chronologique)
     messagesRef.orderByChild("timestamp").limitToLast(10).on("child_added", snap => {
       const msg = snap.val();
       if(msg && typeof msg.text === "string"){ renderMessage(msg.text); }

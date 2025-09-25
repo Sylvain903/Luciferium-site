@@ -60,6 +60,9 @@
       position: absolute;
       top: 20px; left: 20px;
       width: 300px; font-size: 14px; text-align: left;
+      line-height: 1.4;       /* espace entre lignes */
+      max-height: none;       /* pas de limite verticale */
+      overflow: visible;      /* empêche de couper les news */
     }
 
     .chat {
@@ -105,7 +108,7 @@
       .btn-luciferium { width: 90%; max-width: 90%; max-height: 240px; animation: pulseGlow 2s infinite, glitch 6s infinite; }
 
       /* News */
-      .news { position: absolute; top: 10px; left: 10px; width: 40%; font-size: 11px; }
+      .news { position: absolute; top: 10px; left: 10px; width: 40%; font-size: 11px; line-height: 1.4; }
 
       /* Vidéo */
       .video-container { position: absolute; top: 10px; right: 10px; width: 220px; height: 130px; max-width: 220px; }
@@ -114,8 +117,8 @@
       /* Chat sous la vidéo, 3 messages, pas d’overflow interne */
       .chat { position: absolute; right: 10px; bottom: 10px; width: 220px; max-width: calc(100vw - 20px); }
       .chat-messages { height: 60px; }
-      .chat-input input { min-width: 0; }          /* autorise le shrink, évite le débordement */
-      .chat { overflow: hidden; }                   /* coupe toute fuite interne éventuelle */
+      .chat-input input { min-width: 0; }
+      .chat { overflow: hidden; }
     }
   </style>
 </head>
@@ -135,9 +138,9 @@
 
   <div class="news">
     <h3>📰 News</h3>
-  <p>- Bienvenue sur le site Luciferium !</p>
-<p>- Notre application arrive très bientôt.</p>
-<p>- Des animations exclusives sont en préparation…</p>
+    <p>- Bienvenue sur le site Luciferium !</p>
+    <p>- Notre application arrive très bientôt.</p>
+    <p>- Des animations exclusives sont en préparation…</p>
   </div>
 
   <div class="chat">
@@ -198,4 +201,3 @@
   </script>
 </body>
 </html>
-

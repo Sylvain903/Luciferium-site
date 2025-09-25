@@ -70,7 +70,7 @@
       text-align: left;
     }
 
-    /* Zone chat (corrigé en bas à droite) */
+    /* Zone chat (bas à droite) */
     .chat {
       position: fixed;
       right: 20px;
@@ -115,9 +115,18 @@
         width: 100%; margin: 0; text-align: center;
       }
       .btn-luciferium {
-        width: 100%;
-        max-height: 60px;
+        width: 100%;           /* pleine largeur */
+        max-height: none;      /* pas de limite de hauteur */
         object-fit: contain;
+        animation: pulseGlow 2s infinite; /* effet lumineux */
+      }
+      @keyframes pulseGlow {
+        0%, 100% {
+          filter: drop-shadow(0 0 6px #ff0000) drop-shadow(0 0 12px #ff4500);
+        }
+        50% {
+          filter: drop-shadow(0 0 12px #ff0000) drop-shadow(0 0 24px #ff6600);
+        }
       }
       .video-container { position: relative; top: 0; right: 0; width: 100%; height: auto; margin: 0; }
       .video-container iframe { height: 200px; }

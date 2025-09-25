@@ -88,7 +88,7 @@
       text-align: left;
     }
 
-    /* Zone chat */
+    /* Zone chat (desktop) */
     .chat {
       position: fixed;
       right: 20px;
@@ -126,8 +126,9 @@
 
     /* MOBILE */
     @media (max-width: 768px) {
+      /* >>> Correction clé : remettre le logo dans le flux, tout en haut */
       .btn-container {
-        position: absolute;
+        position: relative;  /* était absolute -> repasse en flux */
         top: 0;
         left: 0;
         transform: none;
@@ -141,25 +142,34 @@
         object-fit: contain;
         animation: pulseGlow 2s infinite, glitch 6s infinite;
       }
+
+      /* Vidéo juste sous le logo */
       .video-container {
         position: relative;
         top: 0;
+        right: 0;
         width: 100%;
         height: auto;
         margin: 0;
       }
       .video-container iframe { height: 200px; }
+
+      /* News sous la vidéo */
       .news {
         position: relative;
         top: 0;
+        left: 0;
         width: 100%;
         margin: 10px 0;
         text-align: center;
       }
+
+      /* Chat tout en bas, centré pleine largeur */
       .chat {
         position: fixed;
         bottom: 0;
         left: 0;
+        right: 0;
         width: 100%;
         margin: 0 auto;
       }
@@ -170,7 +180,7 @@
   <!-- Fond accueil -->
   <img src="acceuil_site.png" class="bg" alt="Accueil Luciferium">
 
-  <!-- Bouton/logo -->
+  <!-- Logo -->
   <div class="btn-container">
     <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
   </div>

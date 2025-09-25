@@ -24,6 +24,8 @@
       z-index: -1;
       display: block;
     }
+
+    /* Logo centré géant */
     .btn-container {
       position: absolute;
       top: 50%;
@@ -68,12 +70,12 @@
       text-align: left;
     }
 
-    /* Zone chat */
+    /* Zone chat (corrigé en bas à droite) */
     .chat {
       position: fixed;
       right: 20px;
       bottom: 20px;
-      width: 320px; /* largeur proche du lecteur vidéo */
+      width: 320px;
       box-sizing: border-box;
       background: rgba(0,0,0,0.70);
       padding: 10px;
@@ -127,7 +129,7 @@
   <!-- Fond accueil -->
   <img src="acceuil_site.png" class="bg" alt="Accueil Luciferium">
 
-  <!-- Bouton centré géant -->
+  <!-- Logo centré géant -->
   <div class="btn-container">
     <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
   </div>
@@ -192,8 +194,7 @@
     function sendMessage(){
       const text = ($input.value || "").trim();
       if(!text) return;
-      // 200 caractères max côté client (en plus de la règle serveur)
-      const trimmed = text.substring(0, 200);
+      const trimmed = text.substring(0, 200); // limite côté client
       messagesRef.push({ text: trimmed, timestamp: Date.now() });
       $input.value = "";
     }
@@ -203,7 +204,7 @@
       if(e.key === "Enter"){ e.preventDefault(); sendMessage(); }
     });
 
-    // Écoute en direct des 10 derniers messages (ordre chronologique)
+    // Écoute en direct des 10 derniers messages
     messagesRef.orderByChild("timestamp").limitToLast(10).on("child_added", snap => {
       const msg = snap.val();
       if(msg && typeof msg.text === "string"){ renderMessage(msg.text); }

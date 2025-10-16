@@ -20,7 +20,8 @@
       top: 0; left: 0;
       width: 100%; height: 100%;
       object-fit: fill;
-      z-index: -1; display: block;
+      z-index: -1;
+      display: block;
     }
 
     .btn-container {
@@ -29,11 +30,13 @@
       transform: translate(-50%, -50%);
       text-align: center; width: 100%;
     }
+
     .btn-luciferium {
       width: 100%; max-width: 1200px; height: auto;
       cursor: pointer; transition: transform .2s, filter .2s;
       animation: pulseGlow 2s infinite, glitch 6s infinite;
     }
+
     .btn-luciferium:hover { transform: scale(1.05); filter: brightness(1.2); }
 
     @keyframes pulseGlow {
@@ -55,6 +58,7 @@
       max-width: 90%;
       margin: 0 auto;
     }
+
     .video-container iframe {
       width: 100%;
       aspect-ratio: 16/9;
@@ -65,79 +69,80 @@
     .news {
       position: absolute;
       top: 20px; left: 20px;
-      width: 300px; font-size: 14px; text-align: left;
+      width: 300px;
+      font-size: 14px;
+      text-align: left;
       line-height: 1.4;
-      max-height: none;
-      overflow: visible;
+      background: rgba(0,0,0,0.5);
+      padding: 10px;
+      border-radius: 6px;
+      z-index: 10;
     }
 
-    /* 🔗 Lien Accès sous la News */
+    /* ✅ Lien bien visible sous la news */
     .access-link {
-      margin-top: 15px;
-      text-align: left;
+      margin-top: 10px;
+      padding: 8px;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid #ff4500;
+      border-radius: 5px;
+      display: inline-block;
     }
+
     .access-link a {
       color: #ff4500;
       text-decoration: none;
       font-weight: bold;
       font-size: 15px;
-      transition: color 0.3s ease;
     }
-    .access-link a:hover {
-      color: #fff;
+
+    .access-link:hover {
+      background: #ff4500;
+    }
+
+    .access-link:hover a {
+      color: #000;
     }
 
     .chat {
       position: fixed;
       right: 20px; bottom: 20px;
-      width: 320px; box-sizing: border-box;
-      background: rgba(0,0,0,.7); padding: 10px; border-radius: 6px;
+      width: 320px;
+      box-sizing: border-box;
+      background: rgba(0,0,0,.7);
+      padding: 10px;
+      border-radius: 6px;
     }
+
     .chat-messages {
-      height: 120px; overflow-y: auto;
-      font-size: 13px; line-height: 1.35; margin-bottom: 6px;
+      height: 120px;
+      overflow-y: auto;
+      font-size: 13px;
+      line-height: 1.35;
+      margin-bottom: 6px;
     }
+
     .chat-msg { padding: 2px 0; word-wrap: break-word; }
+
     .chat-input { display: flex; gap: 6px; }
+
     .chat-input input {
-      flex: 1; padding: 8px; font-size: 13px;
+      flex: 1;
+      padding: 8px;
+      font-size: 13px;
       border:1px solid rgba(255,255,255,.25);
-      background: rgba(0,0,0,.35); color:#fff;
+      background: rgba(0,0,0,.35);
+      color:#fff;
     }
+
     .chat-input button {
-      padding: 8px 12px; font-size: 13px; cursor: pointer;
+      padding: 8px 12px;
+      font-size: 13px;
+      cursor: pointer;
       border:1px solid rgba(255,255,255,.25);
-      background: rgba(255,255,255,.1); color:#fff;
+      background: rgba(255,255,255,.1);
+      color:#fff;
       white-space: nowrap;
-    }
-
-    /* MOBILE portrait */
-    @media (max-width: 768px) and (orientation: portrait) {
-      .btn-container { position: relative; top: 0; left: 0; transform: none; width: 100%; margin: 0; padding: 0; text-align: center; }
-      .btn-luciferium { width: 100%; max-height: 120px; object-fit: contain; display: block; margin: 0 auto; }
-      .video-container { position: relative; top: 0; right: 0; width: 100%; max-width: 100%; }
-      .news { position: relative; top: 0; left: 0; width: 100%; margin: 10px 0; text-align: center; }
-      .access-link { text-align: center; margin-top: 10px; }
-      .chat { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; margin: 0 auto; border-radius: 0; }
-    }
-
-    /* MOBILE paysage */
-    @media (max-width: 1024px) and (orientation: landscape) {
-      html, body { overflow-x: hidden; }
-
-      .btn-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: auto; z-index: 5; }
-      .btn-luciferium { width: 90%; max-width: 90%; max-height: 240px; animation: pulseGlow 2s infinite, glitch 6s infinite; }
-
-      .news { position: absolute; top: 10px; left: 10px; width: 40%; font-size: 11px; line-height: 1.4; }
-      .access-link { margin-top: 5px; }
-
-      .video-container { position: absolute; top: 10px; right: 10px; width: 220px; max-width: 220px; }
-      .video-container iframe { width: 100%; aspect-ratio: 16/9; height: auto; }
-
-      .chat { position: absolute; right: 10px; bottom: 10px; width: 220px; max-width: calc(100vw - 20px); }
-      .chat-messages { height: 60px; }
-      .chat-input input { min-width: 0; }
-      .chat { overflow: hidden; }
     }
   </style>
 </head>
@@ -163,7 +168,7 @@
     <p>- Des animations exclusives sont en préparation…</p>
     <p>- Et des petites surprises sur le site au fil du temps.</p>
 
-    <!-- 🔗 Lien d'accès secret sous la News -->
+    <!-- 🔗 Lien d'accès bien visible -->
     <div class="access-link">
       <a href="acces.html">Accès spécial (testeurs)</a>
     </div>
@@ -191,6 +196,7 @@
       appId: "1:1088392141113:web:cfcfbe4c7893cbafb430e8",
       measurementId: "G-1JRTJH14P8"
     };
+
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
     const messagesRef = db.ref("messages");

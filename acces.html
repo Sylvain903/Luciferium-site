@@ -5,14 +5,64 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Accès Luciferium</title>
   <style>
-    html,body{height:100%;margin:0;background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif}
-    .wrap{height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column}
-    input{padding:12px 14px;font-size:16px;border:1px solid #333;background:#050505;color:#fff;text-align:center;border-radius:6px;min-width:260px}
-    button{margin-top:12px;padding:10px 18px;font-size:15px;background:#111;border:1px solid #333;color:#fff;cursor:pointer;border-radius:6px}
-    #download{display:none;margin-top:18px;animation:fade .25s ease}
-    a.download-link{color:#111;background:#ff4500;padding:10px 18px;border-radius:6px;text-decoration:none;font-weight:700}
-    @keyframes fade{from{opacity:0}to{opacity:1}}
-    .hint{margin-top:10px;color:#777;font-size:13px}
+    html,body {
+      height:100%;
+      margin:0;
+      background:#000;
+      color:#fff;
+      font-family:Arial,Helvetica,sans-serif;
+    }
+    .wrap {
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      text-align:center;
+    }
+    input {
+      padding:12px 14px;
+      font-size:16px;
+      border:1px solid #333;
+      background:#050505;
+      color:#fff;
+      text-align:center;
+      border-radius:6px;
+      min-width:260px;
+    }
+    button {
+      margin-top:12px;
+      padding:10px 18px;
+      font-size:15px;
+      background:#111;
+      border:1px solid #333;
+      color:#fff;
+      cursor:pointer;
+      border-radius:6px;
+    }
+    #download {
+      display:none;
+      margin-top:18px;
+      animation:fade .25s ease;
+    }
+    a.download-link {
+      color:#111;
+      background:#ff4500;
+      padding:10px 18px;
+      border-radius:6px;
+      text-decoration:none;
+      font-weight:700;
+    }
+    a.download-link:hover {
+      background:#fff;
+      color:#000;
+    }
+    @keyframes fade {from{opacity:0}to{opacity:1}}
+    .hint {
+      margin-top:10px;
+      color:#777;
+      font-size:13px;
+    }
   </style>
 </head>
 <body>
@@ -26,15 +76,21 @@
 
     <div id="download">
       <p>Code validé — téléchargement :</p>
-      <a class="download-link" id="dl" href="https://drive.google.com/uc?export=download&id=17kZYVHP8i_-R1mlT429ZAJOyF24VnpZv" rel="noopener" target="_blank">Télécharger Luciferium.apk</a>
-      <p class="hint">Ne partagez le lien qu'aux testeurs de confiance.</p>
+      <a
+        class="download-link"
+        id="dl"
+        href="https://drive.google.com/uc?export=download&id=17kZYVHP8i_-R1mlT429ZAJOyF24VnpZv"
+        rel="noopener"
+        target="_blank"
+      >Télécharger Luciferium.apk</a>
+      <p class="hint">Ne partagez ce lien qu'aux testeurs de confiance.</p>
     </div>
   </div>
 
   <script>
-    // ======= CHANGE LE CODE ICI (Ctrl+F -> "CODE_SECRET") =======
-    const CODE_SECRET = "lucifer2025"; // <--- remplace par ton code secret
-    // ============================================================
+    // ======= CODE SECRET (modifie ici si besoin) =======
+    const CODE_SECRET = "lucifer2025";
+    // ==================================================
     const codeInput = document.getElementById('codeInput');
     const codeZone = document.getElementById('codeZone');
     const download = document.getElementById('download');
@@ -45,19 +101,25 @@
       if(val === CODE_SECRET){
         codeZone.style.display = 'none';
         download.style.display = 'block';
-        // optionnel : effacer l'historique du champ pour que le code ne reste pas visible
         codeInput.value = '';
       } else {
-        // feedback discret plutôt qu'alerte
         codeInput.value = '';
         codeInput.placeholder = 'Code incorrect, réessaie';
         codeInput.style.borderColor = '#8b0000';
-        setTimeout(()=>{ codeInput.placeholder = 'Entrez le code secret'; codeInput.style.borderColor='#333'; }, 1200);
+        setTimeout(()=>{
+          codeInput.placeholder = 'Entrez le code secret';
+          codeInput.style.borderColor='#333';
+        }, 1200);
       }
     }
 
-    // Envoi avec Entrée
-    codeInput.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); checkCode(); } });
+    // Validation avec la touche Entrée
+    codeInput.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter'){
+        e.preventDefault();
+        checkCode();
+      }
+    });
   </script>
 </body>
 </html>

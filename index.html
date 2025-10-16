@@ -170,17 +170,24 @@
 
     <!-- 🔗 Lien d'accès bien visible -->
     <div class="access-link">
-      <a href="acces.html">Accès spécial (testeurs)</a>
+      <a href="acces.html">Accès spécial </a>
     </div>
   </div>
 
-  <div class="chat">
-    <div id="chat-messages" class="chat-messages"></div>
-    <div class="chat-input">
-      <input id="chat-input" type="text" placeholder="Écrire un message… (Entrée pour envoyer)">
-      <button id="send-btn">Envoyer</button>
-    </div>
-  </div>
+ <!-- 🔒 Accès testeurs (désactivable) -->
+<div class="access-link" id="secret-link" style="display:none;">
+  <a href="acces.html">Accès spécial (testeurs)</a>
+</div>
+
+<script>
+  // ✅ active ou désactive le lien testeurs ici :
+  const SHOW_SECRET_LINK = true; // ← mettre false pour le cacher
+
+  if (SHOW_SECRET_LINK) {
+    document.getElementById("secret-link").style.display = "block";
+  }
+</script>
+
 
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
@@ -233,3 +240,4 @@
   </script>
 </body>
 </html>
+

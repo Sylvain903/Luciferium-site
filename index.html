@@ -36,6 +36,23 @@
     }
     .btn-luciferium:hover { transform: scale(1.05); filter: brightness(1.2); }
 
+    /* ✨ Ajout du lien vers la page secrète */
+    .access-link {
+      display: block;
+      text-align: center;
+      margin-top: 25px;
+    }
+    .access-link a {
+      color: #ff4500;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 18px;
+      transition: color .2s;
+    }
+    .access-link a:hover {
+      color: #fff;
+    }
+
     @keyframes pulseGlow {
       0%,100%{filter:drop-shadow(0 0 6px #f00) drop-shadow(0 0 12px #f4500)}
       50%{filter:drop-shadow(0 0 12px #f00) drop-shadow(0 0 24px #f60)}
@@ -99,6 +116,7 @@
     @media (max-width: 768px) and (orientation: portrait) {
       .btn-container { position: relative; top: 0; left: 0; transform: none; width: 100%; margin: 0; padding: 0; text-align: center; }
       .btn-luciferium { width: 100%; max-height: 120px; object-fit: contain; display: block; margin: 0 auto; }
+      .access-link { margin-top: 15px; }
       .video-container { position: relative; top: 0; right: 0; width: 100%; max-width: 100%; }
       .news { position: relative; top: 0; left: 0; width: 100%; margin: 10px 0; text-align: center; }
       .chat { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; margin: 0 auto; border-radius: 0; }
@@ -110,6 +128,7 @@
 
       .btn-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: auto; z-index: 5; }
       .btn-luciferium { width: 90%; max-width: 90%; max-height: 240px; animation: pulseGlow 2s infinite, glitch 6s infinite; }
+      .access-link { margin-top: 10px; }
 
       .news { position: absolute; top: 10px; left: 10px; width: 40%; font-size: 11px; line-height: 1.4; }
 
@@ -128,9 +147,14 @@
 
   <div class="btn-container">
     <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
+
+    <!-- 🌑 Lien d'accès secret -->
+    <div class="access-link">
+      <a href="acces.html">Accès spécial (testeurs)</a>
+    </div>
   </div>
 
-  <!-- VIDEO (unique, corrigée avec aspect-ratio) -->
+  <!-- VIDEO -->
   <div class="video-container">
     <iframe src="https://www.youtube.com/embed/QHIYjBSUTBU"
             frameborder="0"

@@ -79,7 +79,7 @@
       z-index: 10;
     }
 
-    /* ✅ Lien bien visible sous la news */
+    /* ✅ Lien sous la News */
     .access-link {
       margin-top: 10px;
       padding: 8px;
@@ -168,26 +168,20 @@
     <p>- Des animations exclusives sont en préparation…</p>
     <p>- Et des petites surprises sur le site au fil du temps.</p>
 
-    <!-- 🔗 Lien d'accès bien visible -->
-    <div class="access-link">
-      <a href="acces.html">Accès spécial </a>
+    <!-- 🔒 Lien testeurs (désactivable ici) -->
+    <div class="access-link" id="secret-link" style="display:none;">
+      <a href="acces.html">Accès spécial (testeurs)</a>
     </div>
   </div>
 
- <!-- 🔒 Accès testeurs (désactivable) -->
-<div class="access-link" id="secret-link" style="display:none;">
-  <a href="acces.html">Accès spécial (testeurs)</a>
-</div>
+  <script>
+    // ✅ Active/désactive le lien ici :
+    const SHOW_SECRET_LINK = true; // ← mettre false pour le cacher
 
-<script>
-  // ✅ active ou désactive le lien testeurs ici :
-  const SHOW_SECRET_LINK = true; // ← mettre false pour le cacher
-
-  if (SHOW_SECRET_LINK) {
-    document.getElementById("secret-link").style.display = "block";
-  }
-</script>
-
+    if (SHOW_SECRET_LINK) {
+      document.getElementById("secret-link").style.display = "inline-block";
+    }
+  </script>
 
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
@@ -240,4 +234,3 @@
   </script>
 </body>
 </html>
-

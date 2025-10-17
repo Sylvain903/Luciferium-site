@@ -79,7 +79,6 @@
       z-index: 10;
     }
 
-    /* ✅ Lien sous la News */
     .access-link {
       margin-top: 10px;
       padding: 8px;
@@ -144,6 +143,29 @@
       color:#fff;
       white-space: nowrap;
     }
+
+    /* ✅ Bloc News responsive */
+    @media screen and (max-width: 768px) and (orientation: portrait) {
+      .news {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        border-radius: 0;
+        text-align: center;
+        font-size: 13px;
+        background: rgba(0,0,0,0.7);
+      }
+
+      .news h3 {
+        margin-top: 5px;
+      }
+
+      .access-link {
+        display: block;
+        margin: 10px auto;
+      }
+    }
   </style>
 </head>
 <body>
@@ -153,7 +175,6 @@
     <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
   </div>
 
-  <!-- VIDEO -->
   <div class="video-container">
     <iframe src="https://www.youtube.com/embed/QHIYjBSUTBU"
             frameborder="0"
@@ -168,16 +189,13 @@
     <p>- Des animations exclusives sont en préparation…</p>
     <p>- Et des petites surprises sur le site au fil du temps.</p>
 
-    <!-- 🔒 Lien testeurs (désactivable ici) -->
     <div class="access-link" id="secret-link" style="display:none;">
       <a href="acces.html">Accès spécial</a>
     </div>
   </div>
 
   <script>
-    // ✅ Active/désactive le lien ici :
-    const SHOW_SECRET_LINK = true; // ← mettre false pour le cacher
-
+    const SHOW_SECRET_LINK = true;
     if (SHOW_SECRET_LINK) {
       document.getElementById("secret-link").style.display = "inline-block";
     }
@@ -234,4 +252,3 @@
   </script>
 </body>
 </html>
-

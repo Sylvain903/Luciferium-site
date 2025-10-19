@@ -103,14 +103,17 @@
       color: #000;
     }
 
-    .chat {
+    /* ✅ Chat intégré en bas à droite */
+    .chat-bottom-right {
       position: fixed;
-      right: 20px; bottom: 20px;
+      right: 20px;
+      bottom: 20px;
       width: 320px;
       box-sizing: border-box;
       background: rgba(0,0,0,.7);
       padding: 10px;
       border-radius: 6px;
+      z-index: 99999;
     }
 
     .chat-messages {
@@ -191,6 +194,15 @@
 
     <div class="access-link" id="secret-link" style="display:none;">
       <a href="acces.html">Accès spécial</a>
+    </div>
+  </div>
+
+  <!-- ✅ Chat rétabli en bas à droite -->
+  <div id="chat-container" class="chat-bottom-right">
+    <div id="chat-messages" class="chat-messages"></div>
+    <div class="chat-input">
+      <input id="chat-input" type="text" placeholder="Écris ton message..." />
+      <button id="send-btn">Envoyer</button>
     </div>
   </div>
 

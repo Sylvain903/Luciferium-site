@@ -15,14 +15,16 @@
       color: white;
     }
 
+    /* ✅ Image de fond affichée en entier (plus de zoom ni de rognage) */
     img.bg {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      object-fit: cover;
+      object-fit: contain; /* affiche toute l’image */
+      background-color: black; /* fond noir si bandes visibles */
       z-index: -1;
       display: block;
-      filter: brightness(0.9);
+      filter: brightness(1);
     }
 
     .btn-container {
@@ -192,7 +194,7 @@
       }
     }
 
-    /* ✅ Paysage mobile réduit : même positions mais plus petit */
+    /* ✅ Paysage mobile réduit : mêmes positions mais plus petit */
     @media screen and (orientation: landscape) and (max-width: 1024px) {
       body {
         background-size: cover;
@@ -247,7 +249,7 @@
 
       img.bg {
         filter: brightness(1.0) saturate(1.3);
-        transform: none; /* ✅ Correction : plus de zoom */
+        transform: none; /* ✅ image non zoomée */
       }
     }
   </style>

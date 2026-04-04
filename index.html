@@ -60,13 +60,18 @@
       top: 20px; right: 20px;
       width: 320px;
       max-width: 90%;
-      margin: 0 auto;
+      z-index: 100;
+      border: 2px solid #ff4500; /* Bordure rouge Lucifer */
+      box-shadow: 0 0 15px rgba(255, 69, 0, 0.5); /* Lueur infernale */
+      border-radius: 8px;
+      overflow: hidden;
+      background: #000;
     }
 
     .video-container iframe {
       width: 100%;
       aspect-ratio: 16/9;
-      height: auto;
+      display: block;
       border: none;
     }
 
@@ -263,17 +268,13 @@
   <img src="bouton_acces.png" class="btn-luciferium" alt="Accès Luciferium">
 </a>
   </div>
-
-  <div class="video-container">
-  <video
-  autoplay
-  muted
-  loop
-  controls
-  style="width:100%;border:none;border-radius:8px;">
-  <source src="teaser.mp4" type="video/mp4">
-  Votre navigateur ne prend pas en charge la vidéo.
-</video>
+<div class="video-container">
+    <iframe 
+        src="https://www.youtube.com/embed/Vxl6bgVWo20?autoplay=1&mute=1&loop=1&playlist=Vxl6bgVWo20&rel=0" 
+        title="Luciferium Teaser" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
   </div>
 
   <div class="news">

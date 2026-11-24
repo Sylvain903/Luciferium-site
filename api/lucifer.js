@@ -1,3 +1,5 @@
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Méthode non autorisée' });
@@ -39,23 +41,43 @@ export default async function handler(req, res) {
       }
     ];
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`,
-      {
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`;
+    const payload = JSON.stringify({
+      systemInstruction: { parts: [{ text: systemPrompt }] },
+      contents,
+      generationConfig: {
+        temperature: 0.9,
+        maxOutputTokens: 250
+      }
+    });
+
+    const retryDelays = [0, 600, 1400];
+    let response = null;
+    let data = null;
+
+    for (let i = 0; i < retryDelays.length; i++) {
+      if (retryDelays[i] > 0) {
+        await sleep(retryDelays[i]);
+      }
+
+      response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          systemInstruction: { parts: [{ text: systemPrompt }] },
-          contents,
-          generationConfig: {
-            temperature: 0.9,
-            maxOutputTokens: 250
-          }
-        })
-      }
-    );
+        body: payload
+      });
 
-    const data = await response.json();
+      data = await response.json();
+
+      const isTemporaryOverload =
+        response.status === 429 ||
+        response.status === 503 ||
+        /high demand|overloaded|try again/i.test(data?.error?.message || '');
+
+      if (response.ok || !isTemporaryOverload || i === retryDelays.length - 1) {
+        break;
+      }
+    }
+
     if (!response.ok) {
       return res.status(response.status).json({ error: data?.error?.message || 'Erreur Gemini' });
     }
